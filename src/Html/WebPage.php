@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+namespace Html;
 class WebPage
 {
     private string $head = "";
