@@ -1,2 +1,4 @@
 /.idea/
 /vendor/
+/.mypdo.ini
+.gitignore~
