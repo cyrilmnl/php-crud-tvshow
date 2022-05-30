@@ -3,6 +3,7 @@
 namespace Entity\Collection;
 
 use Database\MyPdo;
+use Entity\Tvshow;
 use PDO;
 
 class TvshowCollection
@@ -18,7 +19,7 @@ class TvshowCollection
         );
 
         $stmt->execute();
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Artist::class);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Tvshow::class);
         return $stmt->fetchAll();
     }
 }
