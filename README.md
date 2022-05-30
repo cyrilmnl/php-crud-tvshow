@@ -11,3 +11,9 @@
 ```linux
 php -d display_errors -S localhost:8000 -t public/
 ```
+
+#### Style de codage
+##### Vérification manuelle :
+```linux
+php vendor/bin/php-cs-fixer fix
+```
