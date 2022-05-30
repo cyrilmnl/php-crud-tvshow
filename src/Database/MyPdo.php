@@ -76,10 +76,10 @@ final class MyPdo extends PDO
      *
      * Seule la classe MyPDO peut construire une instance de MyPDO.
      *
-     * @param string $dsn           DSN pour la connexion BD
+     * @param string $dsn DSN pour la connexion BD
      * @param string|null $username Utilisateur pour la connexion BD
      * @param string|null $password Mot de passe pour la connexion BD
-     * @param array|null $options   Options du pilote BD
+     * @param array|null $options Options du pilote BD
      */
     private function __construct(string $dsn, string $username = null, string $password = null, array $options = null)
     {
@@ -89,13 +89,6 @@ final class MyPdo extends PDO
             // Activer les clés étrangères qui sont désactivées par défaut
             $this->exec('PRAGMA foreign_keys = ON');
         }
-    }
-
-    /**
-     * Empêcher le clonage, le singleton doit rester unique.
-     */
-    private function __clone(): void
-    {
     }
 
     /**
@@ -122,32 +115,6 @@ final class MyPdo extends PDO
         }
 
         return self::$myPdoInstance;
-    }
-
-    /**
-     * Fixer programmatiquement la configuration de la connexion à la BD.
-     *
-     * @param string $dsn      DSN pour la connexion BD
-     * @param string $username Utilisateur pour la connexion BD
-     * @param string $password Mot de passe pour la connexion BD
-     * @param array $options   Options du pilote BD
-     *
-     * @throws PDOException Si la variable d'environnement APP_DIR est utilisée, mais n'est pas définie
-     */
-    public static function setConfiguration(
-        string $dsn,
-        string $username = '',
-        string $password = '',
-        array  $options = []
-    ): void {
-        // Remplacer %APP_DIR% par le chemin de l'application si SQLite est utilisé
-        if (str_contains($dsn, '%APP_DIR%') && !getenv('APP_DIR')) {
-            throw new PDOException(__CLASS__ . ': APP_DIR environment variable not set');
-        }
-        self::$dsn = preg_replace('/^sqlite:(%APP_DIR%)(.*)/', 'sqlite:' . getenv('APP_DIR') . '$2', $dsn);
-        self::$username = $username;
-        self::$password = $password;
-        self::$options = $options + self::$options;
     }
 
     /**
@@ -184,6 +151,32 @@ final class MyPdo extends PDO
         }
 
         return false;
+    }
+
+    /**
+     * Fixer programmatiquement la configuration de la connexion à la BD.
+     *
+     * @param string $dsn DSN pour la connexion BD
+     * @param string $username Utilisateur pour la connexion BD
+     * @param string $password Mot de passe pour la connexion BD
+     * @param array $options Options du pilote BD
+     *
+     * @throws PDOException Si la variable d'environnement APP_DIR est utilisée, mais n'est pas définie
+     */
+    public static function setConfiguration(
+        string $dsn,
+        string $username = '',
+        string $password = '',
+        array  $options = []
+    ): void {
+        // Remplacer %APP_DIR% par le chemin de l'application si SQLite est utilisé
+        if (str_contains($dsn, '%APP_DIR%') && !getenv('APP_DIR')) {
+            throw new PDOException(__CLASS__ . ': APP_DIR environment variable not set');
+        }
+        self::$dsn = preg_replace('/^sqlite:(%APP_DIR%)(.*)/', 'sqlite:' . getenv('APP_DIR') . '$2', $dsn);
+        self::$username = $username;
+        self::$password = $password;
+        self::$options = $options + self::$options;
     }
 
     /**
@@ -233,5 +226,12 @@ final class MyPdo extends PDO
         }
 
         return false;
+    }
+
+    /**
+     * Empêcher le clonage, le singleton doit rester unique.
+     */
+    private function __clone(): void
+    {
     }
 }

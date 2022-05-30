@@ -1,17 +1,17 @@
 {
-    "name": "mani0022/php-crud-tvshow",
-    "description": "Développement d’une application",
-    "type": "project",
-    "license": "Copyleft",
-    "require": {
-      "ext-pdo": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.8"
+  "name": "mani0022/php-crud-tvshow",
+  "description": "Développement d’une application",
+  "type": "project",
+  "license": "Copyleft",
+  "require": {
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "src/"
     }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.8"
+  }
 }
