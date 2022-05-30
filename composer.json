@@ -3,7 +3,9 @@
     "description": "Développement d’une application",
     "type": "project",
     "license": "Copyleft",
-    "require": {},
+    "require": {
+      "ext-pdo": "*"
+    },
     "autoload": {
         "psr-4": {
             "": "src/"
