@@ -32,6 +32,16 @@ class WebPage
     }
 
     /**
+     * Permet de récupérer la date de la dernière modification de la page
+     *
+     * @return string
+     */
+    public static function getLastModification(): string
+    {
+        return date("d/F/Y-H:i:s.", getlastmod());
+    }
+
+    /**
      * Permet d'ajouter du contenu dans à l'entête du site
      *
      * @param string $content
@@ -116,8 +126,11 @@ class WebPage
         </body>
     </html>
 HTML;
-        
+
     }
+
+
+    // <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
 
     /**
      * Permet de récupérer le titre du site
@@ -128,9 +141,6 @@ HTML;
     {
         return $this->title;
     }
-
-
-    // <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
 
     /**
      * Permet de définir le titre du site
@@ -160,15 +170,5 @@ HTML;
     public function getBody(): string
     {
         return $this->body;
-    }
-
-    /**
-     * Permet de récupérer la date de la dernière modification de la page
-     *
-     * @return string
-     */
-    public static function getLastModification(): string
-    {
-        return date("d/F/Y-H:i:s.", getlastmod());
     }
 }

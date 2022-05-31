@@ -1,0 +1,60 @@
+html {
+    display: flex;
+    height: 99%;
+    width: 99%;
+    flex-direction: column;
+    gap: 25px;
+}
+
+body {
+    display: flex;
+    height: 99%;
+    width: 99%;
+    flex-direction: column;
+    gap: 18px;
+}
+
+header {
+    border: 2px solid black;
+    text-align: center;
+    font-size: 30px;
+    padding: 15px 0px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+footer{
+    border: 2px solid black;
+    padding: 15px 0px;
+    text-align: center;
+}
+
+.serie__item {
+    border: 2px solid red;
+    margin: 10px;
+    display: flex;
+    padding: 8px;
+}
+
+.serie__img {
+    margin: auto;
+    margin: auto 20px;
+}
+
+.serie__content {
+    overflow: hidden;
+}
+
+.left {
+    flex-direction: row;
+}
+
+.right {
+    flex-direction: row-reverse;
+}

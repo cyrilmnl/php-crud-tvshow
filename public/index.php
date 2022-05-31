@@ -15,6 +15,8 @@ $pageweb = new WebPage();
  */
 $pageweb->setTitle("Liste des show TV");
 
+$pageweb->appendCssUrl("css/styles.css");
+
 /*
  * OPEN HEADER
  */
@@ -24,6 +26,8 @@ $pageweb->appendContent(
             <header>
 HTML
 );
+
+$pageweb->appendContent("Séries TV");
 
 /*
  * CLOSE HEADER
@@ -47,6 +51,37 @@ $pageweb->appendContent(
 HTML
 );
 
+$cpt = 0;
+
+foreach (TvshowCollection::findAll() as $tv) {
+    $cote = "";
+
+    if ($cpt == 0) {
+        $cpt = 1;
+        $cote = "left";
+    } else {
+        $cpt = 0;
+        $cote = "right";
+    }
+
+    $name = WebPage::escapeString($tv->getName());
+    $desc = WebPage::escapeString($tv->getOverview());
+
+    $html = <<<HTML
+<div class="serie__item {$cote}">
+    <div class="serie__img">
+        <img src="http://cutrona/but/s2/sae2-01/ressources/public/img/default.png" alt="poster de la série">
+    </div>
+    <div class="serie__content">
+        <h2>{$name}</h2>
+        <h3>{$desc}</h3>
+    </div>
+</div>
+HTML;
+
+    $pageweb->appendContent($html);
+}
+
 /*
  * CLOSE MAIN
  */
@@ -69,6 +104,8 @@ $pageweb->appendContent(
 HTML
 );
 
+$pageweb->appendContent(WebPage::getLastModification());
+
 /*
  * CLOSE MAIN
  */
@@ -79,12 +116,5 @@ $pageweb->appendContent(
             </footer>
 HTML
 );
-
-
-//foreach (TvshowCollection::findAll() as $tv) {
-//    $name = WebPage::escapeString($tv->getName());
-//    $desc = WebPage::escapeString($tv->getOverview());
-//    $pageweb->appendContent($name);
-//}
 
 echo $pageweb->toHTML();
