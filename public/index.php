@@ -74,10 +74,10 @@ foreach (TvshowCollection::findAll() as $tv) {
     $desc = WebPage::escapeString($tv->getOverview());
 
     $html = <<<HTML
-                <div class="serie__item">
-                    <a href="" class="{$cote}">
+                <div class="serie__item" id="{$tv->getId()}">
+                    <a href="serie.php?serieId={$tv->getId()}" class="{$cote}">
                         <div class="serie__img">
-                            <img src="http://cutrona/but/s2/sae2-01/ressources/public/img/default.png" alt="poster de la série">
+                            <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
                         </div>
                         <div class="serie__content">
                             <h2>{$name}</h2>
