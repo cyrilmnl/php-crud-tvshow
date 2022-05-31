@@ -15,10 +15,114 @@ $pageweb = new WebPage();
  */
 $pageweb->setTitle("Liste des show TV");
 
+$pageweb->appendCssUrl("css/styles.css");
+
+/*
+ * OPEN HEADER
+ */
+$pageweb->appendContent(
+    <<<HTML
+<!-- OPEN HEADER -->
+            <header>
+
+HTML
+);
+
+$pageweb->appendContent(
+    <<<HTML
+                <h1>Séries TV</h1>
+HTML
+);
+
+/*
+ * CLOSE HEADER
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- CLOSE HEADER -->
+            </header>
+HTML
+);
+
+/*
+ * OPEN MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- OPEN MAIN -->
+            <main>
+
+HTML
+);
+
+$cpt = 0;
 
 foreach (TvshowCollection::findAll() as $tv) {
+    $cote = "";
+
+    if ($cpt == 0) {
+        $cpt = 1;
+        $cote = "left";
+    } else {
+        $cpt = 0;
+        $cote = "right";
+    }
+
     $name = WebPage::escapeString($tv->getName());
-    $pageweb->appendContent($name);
+    $desc = WebPage::escapeString($tv->getOverview());
+
+    $html = <<<HTML
+                <div class="serie__item">
+                    <a href="" class="{$cote}">
+                        <div class="serie__img">
+                            <img src="http://cutrona/but/s2/sae2-01/ressources/public/img/default.png" alt="poster de la série">
+                        </div>
+                        <div class="serie__content">
+                            <h2>{$name}</h2>
+                            <h3>{$desc}</h3>
+                        </div>
+                    </a>
+                </div>
+HTML;
+
+    $pageweb->appendContent($html);
 }
 
-echo $pageweb->toHTML(false);
+/*
+ * CLOSE MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- CLOSE MAIN -->
+            </main>
+HTML
+);
+
+/*
+ * OPEN FOOTER
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- OPEN FOOTER -->
+            <footer>
+HTML
+);
+
+$pageweb->appendContent(WebPage::getLastModification());
+
+/*
+ * CLOSE MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- CLOSE FOOTER -->
+            </footer>
+HTML
+);
+
+echo $pageweb->toHTML();

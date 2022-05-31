@@ -32,6 +32,16 @@ class WebPage
     }
 
     /**
+     * Permet de récupérer la date de la dernière modification de la page
+     *
+     * @return string
+     */
+    public static function getLastModification(): string
+    {
+        return date("d/F/Y - H:i:s.", getlastmod());
+    }
+
+    /**
      * Permet d'ajouter du contenu dans à l'entête du site
      *
      * @param string $content
@@ -96,34 +106,31 @@ class WebPage
      * @param bool $modif
      * @return string
      */
-    public function toHTML(bool $modif): string
+    public function toHTML(): string
     {
-        $html = <<<HTML
+        return <<<HTML
 <!DOCTYPE html>
     <html lang="fr">
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+            <!-- TITRE DE LA PAGE -->
             <title>{$this->getTitle()}</title>
+            
+            <!-- ENTETE PERSONNALISE -->
             {$this->getHead()}
         </head>
         <body>
             {$this->getBody()}
-HTML;
-
-        if ($modif) {
-            $html .= <<<HTML
-            <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
-HTML;
-        }
-
-        $html .= <<<HTML
         </body>
     </html>
 HTML;
 
-        return $html;
     }
+
+
+    // <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
 
     /**
      * Permet de récupérer le titre du site
@@ -134,9 +141,6 @@ HTML;
     {
         return $this->title;
     }
-
-
-    // <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
 
     /**
      * Permet de définir le titre du site
@@ -166,15 +170,5 @@ HTML;
     public function getBody(): string
     {
         return $this->body;
-    }
-
-    /**
-     * Permet de récupérer la date de la dernière modification de la page
-     *
-     * @return string
-     */
-    public static function getLastModification(): string
-    {
-        return date("d F Y H:i:s.", getlastmod());
     }
 }
