@@ -9,7 +9,7 @@ use PDO;
 class Tvshow
 {
     protected int $posterId;
-    private int $id;
+    private ?int $id;
     private string $name;
     private string $originalName;
     private string $homepage;
@@ -17,9 +17,9 @@ class Tvshow
 
     /** Assesseur de l'id de la classe Tvshow
      *
-     * @return int
+     * @return ?int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -31,6 +31,28 @@ class Tvshow
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /** Mutateur de l'id de la classe Tvshow
+     *
+     * @param int|null $id
+     * @return $this
+     */
+    public function setId(?int $id): Tvshow
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /** Mutateur du nom de la classe Tvshow
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName(string $name): Tvshow
+    {
+        $this->name = $name;
+        return $this;
     }
 
     /** Assesseur du nom original de la classe Tvshow
@@ -92,5 +114,55 @@ class Tvshow
             throw new EntityNotFoundException("No data found");
         }
         return $fetch;
+    }
+
+    /** Méthode qui supprime une série de la base de données
+     *
+     * @return $this
+     */
+    public function delete(): Tvshow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            DELETE FROM tvshow
+            WHERE id = :id
+        SQL
+        );
+
+        $stmt->execute([":id" => $this->id]);
+        $this->id = null;
+        return $this;
+    }
+
+    /** Méthode qui met à jour le nom d'une série
+     *
+     * @return $this
+     */
+    public function update(): Tvshow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            UPDATE tvshow
+            SET name = :nom
+            WHERE id = :id
+        SQL
+        );
+
+        $stmt->execute([":id" => $this->id, ":nom" => $this->name]);
+        return $this;
+    }
+
+    /** Méthode qui créé une série dans la base de données
+     *
+     * @param string $name
+     * @param int|null $id
+     * @return Tvshow
+     */
+    public static function create(string $name, ?int $id=null): Tvshow
+    {
+        $serie = new Tvshow();
+        $serie->setName($name);
+        $serie->setId($id);
+        return $serie;
     }
 }
