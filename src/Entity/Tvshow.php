@@ -165,4 +165,33 @@ class Tvshow
         $serie->setId($id);
         return $serie;
     }
+
+    public function insert(string $name): Tvshow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            INSERT INTO tvshow (name)
+            VALUES(:nom)
+        SQL
+        );
+
+        $stmt->execute([":nom" => $name]);
+        $this->setId((int)MYPDO::getInstance()->lastInsertId());
+        return $this;
+    }
+
+    public function save(): Tvshow
+    {
+        if ($this->getId() == null) {
+            $this->insert($this->name, $this->id);
+        } else {
+            $this->update();
+        }
+        return $this;
+    }
+
+    private function __construct()
+    {
+
+    }
 }
