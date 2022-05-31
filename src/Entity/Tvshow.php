@@ -2,6 +2,9 @@
 
 namespace Entity;
 
+use Entity\Exception\EntityNotFoundException;
+use PDO;
+
 class Tvshow
 {
     protected int $posterId;
@@ -63,5 +66,30 @@ class Tvshow
     public function getPosterId(): int
     {
         return $this->posterId;
+    }
+
+    /** Méthode permettant d'accéder à un tvshow par son id
+     *
+     * @param int $id
+     * @return Tvshow
+     */
+    public static function findById(int $id): Tvshow
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            SELECT *
+            FROM tvshow
+            WHERE id = :id
+        SQL
+        );
+
+        $stmt->execute([":id" => $id]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Tvshow::class);
+
+        $fetch = $stmt->fetch();
+        if ($fetch == false) {
+            throw new EntityNotFoundException("No data found");
+        }
+        return $fetch;
     }
 }
