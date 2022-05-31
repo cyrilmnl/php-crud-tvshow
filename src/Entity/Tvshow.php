@@ -4,12 +4,12 @@ namespace Entity;
 
 class Tvshow
 {
+    protected int $posterId;
     private int $id;
     private string $name;
     private string $originalName;
     private string $homepage;
     private string $overview;
-    protected int $posterId;
 
     /** Assesseur de l'id de la classe Tvshow
      *

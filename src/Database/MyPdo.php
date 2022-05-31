@@ -168,7 +168,8 @@ final class MyPdo extends PDO
         string $username = '',
         string $password = '',
         array  $options = []
-    ): void {
+    ): void
+    {
         // Remplacer %APP_DIR% par le chemin de l'application si SQLite est utilisé
         if (str_contains($dsn, '%APP_DIR%') && !getenv('APP_DIR')) {
             throw new PDOException(__CLASS__ . ': APP_DIR environment variable not set');
