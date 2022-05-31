@@ -9,7 +9,8 @@ use PDO;
 
 class TvshowCollection
 {
-    /**
+    /** Méthode permettant de retourner un tableau contenant tous les tvShow
+     *
      * @return Tvshow[]
      */
     public static function findAll(): array
