@@ -8,6 +8,10 @@ use PDO;
 
 class TvshowCollection
 {
+    /** Méthode permettant de retourner un tableau contenant tous les tvShow
+     *
+     * @return array
+     */
     public static function findAll(): array
     {
         $stmt = MyPDO::getInstance()->prepare(
