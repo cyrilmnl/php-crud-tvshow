@@ -248,7 +248,7 @@ class Tvshow
     public function save(): Tvshow
     {
         if ($this->getId() == null) {
-            $this->insert($this->name, $this->id, $this->originalName, $this->homepage, $this->overview, $this->posterId);
+            $this->insert($this->name, $this->originalName, $this->homepage, $this->overview, $this->posterId);
         } else {
             $this->update();
         }
