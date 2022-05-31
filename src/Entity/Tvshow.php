@@ -8,7 +8,7 @@ use PDO;
 
 class Tvshow
 {
-    protected int $posterId;
+    protected ?int $posterId;
     private ?int $id;
     private string $name;
     private string $originalName;
@@ -84,19 +84,19 @@ class Tvshow
 
     /** Assesseur de l'id du poster dans la classe Tvshow
      *
-     * @return int
+     * @return int|null
      */
-    public function getPosterId(): int
+    public function getPosterId(): ?int
     {
         return $this->posterId;
     }
 
     /** Mutateur du posterId de la classe Tvshow
      *
-     * @param int $posterId
+     * @param int|null $posterId
      * @return Tvshow
      */
-    public function setPosterId(int $posterId): Tvshow
+    public function setPosterId(?int $posterId): Tvshow
     {
         $this->posterId = $posterId;
         return $this;
@@ -198,11 +198,15 @@ class Tvshow
 
     /** Méthode qui créé une série dans la base de données
      *
+     * @param int|null $posterId
      * @param string $name
      * @param int|null $id
+     * @param string $originalName
+     * @param string $homepage
+     * @param string $overview
      * @return Tvshow
      */
-    public static function create(int $posterId, string $name, ?int $id=null, string $originalName, string $homepage, string $overview): Tvshow
+    public static function create(?int $posterId=null, string $name, ?int $id=null, string $originalName, string $homepage, string $overview): Tvshow
     {
         $serie = new Tvshow();
         $serie->setPosterId($posterId);
@@ -214,24 +218,37 @@ class Tvshow
         return $serie;
     }
 
-    public function insert(string $name): Tvshow
+    /** Méthode qui créé une série dans la base de données à partir de données entrées manuellement
+     *
+     * @param string $name
+     * @param string $originalName
+     * @param string $homepage
+     * @param string $overview
+     * @param int|null $posterId
+     * @return $this
+     */
+    public function insert(string $name, string $originalName, string $homepage, string $overview, ?int $posterId=null): Tvshow
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<'SQL'
-            INSERT INTO tvshow (name)
-            VALUES(:nom)
+            INSERT INTO tvshow (name, originalName, homepage, overview, posterId)
+            VALUES(:nom, :orinom, :hpage, :ov, :pi)
         SQL
         );
 
-        $stmt->execute([":nom" => $name]);
+        $stmt->execute([":nom" => $name, ":orinom" => $originalName, ":hpage" => $homepage, ":ov" => $overview, ":pi" => $posterId]);
         $this->setId((int)MYPDO::getInstance()->lastInsertId());
         return $this;
     }
 
+    /** Méthode qui déclenche insert() ou update() selon que "id" est null ou non
+     *
+     * @return $this
+     */
     public function save(): Tvshow
     {
         if ($this->getId() == null) {
-            $this->insert($this->name, $this->id);
+            $this->insert($this->name, $this->id, $this->originalName, $this->homepage, $this->overview, $this->posterId);
         } else {
             $this->update();
         }
