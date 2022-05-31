@@ -24,10 +24,15 @@ $pageweb->appendContent(
     <<<HTML
 <!-- OPEN HEADER -->
             <header>
+
 HTML
 );
 
-$pageweb->appendContent("Séries TV");
+$pageweb->appendContent(
+    <<<HTML
+                <h1>Séries TV</h1>
+HTML
+);
 
 /*
  * CLOSE HEADER
@@ -48,6 +53,7 @@ $pageweb->appendContent(
 
             <!-- OPEN MAIN -->
             <main>
+
 HTML
 );
 
@@ -68,15 +74,17 @@ foreach (TvshowCollection::findAll() as $tv) {
     $desc = WebPage::escapeString($tv->getOverview());
 
     $html = <<<HTML
-<div class="serie__item {$cote}">
-    <div class="serie__img">
-        <img src="http://cutrona/but/s2/sae2-01/ressources/public/img/default.png" alt="poster de la série">
-    </div>
-    <div class="serie__content">
-        <h2>{$name}</h2>
-        <h3>{$desc}</h3>
-    </div>
-</div>
+                <div class="serie__item">
+                    <a href="" class="{$cote}">
+                        <div class="serie__img">
+                            <img src="http://cutrona/but/s2/sae2-01/ressources/public/img/default.png" alt="poster de la série">
+                        </div>
+                        <div class="serie__content">
+                            <h2>{$name}</h2>
+                            <h3>{$desc}</h3>
+                        </div>
+                    </a>
+                </div>
 HTML;
 
     $pageweb->appendContent($html);

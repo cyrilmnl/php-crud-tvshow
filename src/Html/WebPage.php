@@ -38,7 +38,7 @@ class WebPage
      */
     public static function getLastModification(): string
     {
-        return date("d/F/Y-H:i:s.", getlastmod());
+        return date("d/F/Y - H:i:s.", getlastmod());
     }
 
     /**
