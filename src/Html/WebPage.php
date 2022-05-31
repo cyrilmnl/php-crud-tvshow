@@ -96,33 +96,27 @@ class WebPage
      * @param bool $modif
      * @return string
      */
-    public function toHTML(bool $modif): string
+    public function toHTML(): string
     {
-        $html = <<<HTML
+        return <<<HTML
 <!DOCTYPE html>
     <html lang="fr">
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+            <!-- TITRE DE LA PAGE -->
             <title>{$this->getTitle()}</title>
+            
+            <!-- ENTETE PERSONNALISE -->
             {$this->getHead()}
         </head>
         <body>
             {$this->getBody()}
-HTML;
-
-        if ($modif) {
-            $html .= <<<HTML
-            <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
-HTML;
-        }
-
-        $html .= <<<HTML
         </body>
     </html>
 HTML;
-
-        return $html;
+        
     }
 
     /**
@@ -175,6 +169,6 @@ HTML;
      */
     public static function getLastModification(): string
     {
-        return date("d F Y H:i:s.", getlastmod());
+        return date("d/F/Y-H:i:s.", getlastmod());
     }
 }

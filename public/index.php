@@ -15,10 +15,76 @@ $pageweb = new WebPage();
  */
 $pageweb->setTitle("Liste des show TV");
 
+/*
+ * OPEN HEADER
+ */
+$pageweb->appendContent(
+    <<<HTML
+<!-- OPEN HEADER -->
+            <header>
+HTML
+);
 
-foreach (TvshowCollection::findAll() as $tv) {
-    $name = WebPage::escapeString($tv->getName());
-    $pageweb->appendContent($name);
-}
+/*
+ * CLOSE HEADER
+ */
+$pageweb->appendContent(
+    <<<HTML
 
-echo $pageweb->toHTML(false);
+            <!-- CLOSE HEADER -->
+            </header>
+HTML
+);
+
+/*
+ * OPEN MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- OPEN MAIN -->
+            <main>
+HTML
+);
+
+/*
+ * CLOSE MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- CLOSE MAIN -->
+            </main>
+HTML
+);
+
+/*
+ * OPEN FOOTER
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- OPEN FOOTER -->
+            <footer>
+HTML
+);
+
+/*
+ * CLOSE MAIN
+ */
+$pageweb->appendContent(
+    <<<HTML
+
+            <!-- CLOSE FOOTER -->
+            </footer>
+HTML
+);
+
+
+//foreach (TvshowCollection::findAll() as $tv) {
+//    $name = WebPage::escapeString($tv->getName());
+//    $desc = WebPage::escapeString($tv->getOverview());
+//    $pageweb->appendContent($name);
+//}
+
+echo $pageweb->toHTML();
