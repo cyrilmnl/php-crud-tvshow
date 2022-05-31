@@ -91,6 +91,50 @@ class Tvshow
         return $this->posterId;
     }
 
+    /** Mutateur du posterId de la classe Tvshow
+     *
+     * @param int $posterId
+     * @return Tvshow
+     */
+    public function setPosterId(int $posterId): Tvshow
+    {
+        $this->posterId = $posterId;
+        return $this;
+    }
+
+    /** Mutateur du nom original de la classe Tvshow
+     *
+     * @param string $originalName
+     * @return Tvshow
+     */
+    public function setOriginalName(string $originalName): Tvshow
+    {
+        $this->originalName = $originalName;
+        return $this;
+    }
+
+    /** Mutateur de la page d'accueil de la classe Tvshow
+     *
+     * @param string $homepage
+     * @return Tvshow
+     */
+    public function setHomepage(string $homepage): Tvshow
+    {
+        $this->homepage = $homepage;
+        return $this;
+    }
+
+    /** Mutateur de l'aperçu de la classe Tvshow
+     *
+     * @param string $overview
+     * @return Tvshow
+     */
+    public function setOverview(string $overview): Tvshow
+    {
+        $this->overview = $overview;
+        return $this;
+    }
+
     /** Méthode permettant d'accéder à un tvshow par son id
      *
      * @param int $id
@@ -134,7 +178,7 @@ class Tvshow
         return $this;
     }
 
-    /** Méthode qui met à jour le nom d'une série
+    /** Méthode qui met à jour une série
      *
      * @return $this
      */
@@ -143,12 +187,12 @@ class Tvshow
         $stmt = MyPDO::getInstance()->prepare(
             <<<'SQL'
             UPDATE tvshow
-            SET name = :nom
+            SET name = :nom, originalName = :orinom, homepage = :hpage, overview = :ov
             WHERE id = :id
         SQL
         );
 
-        $stmt->execute([":id" => $this->id, ":nom" => $this->name]);
+        $stmt->execute([":id" => $this->id, ":nom" => $this->name, ":orinom" => $this->originalName, ":hpage" => $this->homepage, ":ov" => $this->overview]);
         return $this;
     }
 
@@ -190,6 +234,9 @@ class Tvshow
         return $this;
     }
 
+    /** Constructeur de la classe Tvshow
+     *
+     */
     private function __construct()
     {
 
