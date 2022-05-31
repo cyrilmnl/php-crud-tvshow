@@ -56,7 +56,7 @@ class Tvshow
         return $this->overview;
     }
 
-    /** Assesseur de l'id du poster de la classe Tvshow
+    /** Assesseur de l'id du poster dans la classe Tvshow
      *
      * @return int
      */
