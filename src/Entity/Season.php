@@ -9,10 +9,13 @@ class Season
     protected int $tvshow;
     private string $name;
     protected int $seasonNumber;
-    protected int $posterId;
+    protected ?int $posterId;
 
     /** Assesseur de l'id de la classe Season
      *
+     * @return int
+     */
+    /**
      * @return int
      */
     public function getId(): int
@@ -51,7 +54,10 @@ class Season
      *
      * @return int
      */
-    public function getPosterId(): int
+    /**
+     * @return int|null
+     */
+    public function getPosterId(): ?int
     {
         return $this->posterId;
     }
