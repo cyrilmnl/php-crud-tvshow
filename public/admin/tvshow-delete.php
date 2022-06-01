@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
 use Entity\Tvshow;
-use Html\Form\TvshowForm;
-use Html\WebPage;
 
 try {
     if (isset($_GET["tvShowId"])) {

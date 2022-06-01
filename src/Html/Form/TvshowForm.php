@@ -28,14 +28,45 @@ class TvshowForm
      * @param string $action
      * @return string
      */
-    public function getHtmlForm(string $action): string
+    public function getHtmlForm(string $action, bool $empty): string
     {
         $action = self::escapeString($action);
         $nom = self::escapeString($this->getTvshow()?->getName());
         $nomOrig = self::escapeString($this->getTvshow()?->getOriginalName());
         $homepage = self::escapeString($this->getTvshow()?->getHomepage());
         $overview = self::escapeString($this->getTvshow()?->getOverview());
-        $content = <<<HTML
+
+        if ($empty) {
+            $content = <<<HTML
+                    <form method="post" action="{$action}">
+                        <label>
+                            Nom
+                            <input type="text" name="name" required>
+                        </label>
+                        
+                        <label>
+                            Nom original
+                            <input type="text" name="nomoriginal" required>
+                        </label>
+                        
+                        <label>
+                            Page d'accueil
+                            <input type="text" name="homepage"" required>
+                        </label>
+                        
+                        <label>
+                            Aperçu
+                            <input type="text" name="overview"" required>
+                        </label>
+                        
+                        <input type="hidden" name="id">
+                        
+                        <button type="submit" name="submit">Enregistrer</button>
+                    </form>
+        HTML;
+        } else {
+
+            $content = <<<HTML
                     <form method="post" action="{$action}">
                         <label>
                             Nom
@@ -44,17 +75,17 @@ class TvshowForm
                         
                         <label>
                             Nom original
-                            <input type="text" name="name" value="{$nomOrig}" required>
+                            <input type="text" name="nomoriginal" value="{$nomOrig}" required>
                         </label>
                         
                         <label>
                             Page d'accueil
-                            <input type="text" name="name" value="{$homepage}" required>
+                            <input type="text" name="homepage" value="{$homepage}" required>
                         </label>
                         
                         <label>
                             Aperçu
-                            <input type="text" name="name" value="{$overview}" required>
+                            <input type="text" name="overview" value="{$overview}" required>
                         </label>
                         
                         <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
@@ -62,6 +93,8 @@ class TvshowForm
                         <button type="submit">Enregistrer</button>
                     </form>
         HTML;
+
+        }
 
         return $content;
     }

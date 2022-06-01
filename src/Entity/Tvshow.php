@@ -25,10 +25,10 @@ class Tvshow
 
     /** Méthode permettant d'accéder à un tvshow par son id
      *
-     * @param int $id
+     * @param int|null $id
      * @return Tvshow
      */
-    public static function findById(int $id): Tvshow
+    public static function findById(?int $id): Tvshow
     {
         $stmt = MyPDO::getInstance()->prepare(
             <<<'SQL'

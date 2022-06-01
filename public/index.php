@@ -30,7 +30,7 @@ HTML
 
 $pageweb->appendContent(
     <<<HTML
-                <h1>Séries TV</h1>
+                <h1>Séries TV</h1>   
 HTML
 );
 
@@ -45,15 +45,17 @@ $pageweb->appendContent(
 HTML
 );
 
-/*
- * OPEN MAIN
- */
 $pageweb->appendContent(
     <<<HTML
-
-            <!-- OPEN MAIN -->
+            <div class="menu">
+                <form action="admin/tvshow-save.php">
+                    <button class="button" type="submit">
+                        Ajouter une série
+                    </button>
+                </form> 
+            </div>
+            
             <main>
-
 HTML
 );
 

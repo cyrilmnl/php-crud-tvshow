@@ -70,15 +70,23 @@ HTML
 HTML
     );
 
-    /*
- * OPEN MAIN
- */
     $pageweb->appendContent(
         <<<HTML
+            <div class="menu">
+                <form action="admin/tvshow-save.php">
+                    <button class="button" type="submit" name="tvShowId" value="{$serieId}">
+                        Modifier la série
+                    </button>
+                </form>
 
-            <!-- OPEN MAIN -->
+                <form action="admin/tvshow-delete.php">
+                    <button class="button" type="submit" name="tvShowId" value="{$serieId}">
+                        Supprimer la série
+                    </button>
+                </form>
+            </div>
+            
             <main>
-
 HTML
     );
 
