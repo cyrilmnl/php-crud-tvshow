@@ -206,15 +206,15 @@ class Tvshow
      * @param string $overview
      * @return Tvshow
      */
-    public static function create(?int $posterId=null, string $name, ?int $id=null, string $originalName, string $homepage, string $overview): Tvshow
+    public static function create(?int $id=null, string $name, string $originalName, string $homepage, string $overview, ?int $posterId=null): Tvshow
     {
         $serie = new Tvshow();
-        $serie->setPosterId($posterId);
-        $serie->setName($name);
         $serie->setId($id);
+        $serie->setName($name);
         $serie->setOriginalName($originalName);
         $serie->setHomepage($homepage);
         $serie->setOverview($overview);
+        $serie->setPosterId($posterId);
         return $serie;
     }
 

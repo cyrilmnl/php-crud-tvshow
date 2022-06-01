@@ -40,6 +40,10 @@ class TvshowForm
     {
         $action = self::escapeString($action);
         $nom = self::escapeString($this->getTvshow()?->getName());
+        $nomOrig = self::escapeString($this->getTvshow()?->getOriginalName());
+        $homepage = self::escapeString($this->getTvshow()?->getHomepage());
+        $overview = self::escapeString($this->getTvshow()?->getOverview());
+        $posterId = self::escapeString($this->getTvshow()?->getPosterId());
         $content = <<<HTML
                     <form method="post" action="{$action}">
                         <label>
@@ -48,8 +52,23 @@ class TvshowForm
                         </label>
                         
                         <label>
-                            Nom
-                            <input type="text" name="name" value="{$nom}" required>
+                            Nom original
+                            <input type="text" name="name" value="{$nomOrig}" required>
+                        </label>
+                        
+                        <label>
+                            Page d'accueil
+                            <input type="text" name="name" value="{$homepage}" required>
+                        </label>
+                        
+                        <label>
+                            Aperçu
+                            <input type="text" name="name" value="{$overview}" required>
+                        </label>
+                        
+                        <label>
+                            Identifiant de la pochette
+                            <input type="text" name="name" value="{$posterId}">
                         </label>
                         
                         <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
@@ -71,16 +90,27 @@ class TvshowForm
         } else {
             $id = null;
         }
-        if (isset($_POST["name"])) {
+        if (isset($_POST["posterId"]) && ctype_digit($_POST["posterId"])) {
+            $posterId = (int)$_POST["posterId"];
+        } else {
+            $posterId = null;
+        }
+        if (isset($_POST["name"]) && isset($_POST["originalName"]) && isset($_POST["homepage"]) && isset($_POST["overview"])) {
             $name = $_POST["name"];
             $name = self::stripTagsAndTrim();
-            if ($name == "") {
-                throw new ParameterException("Nom vide");
+            $originalName = $_POST["originalName"];
+            $originalName = self::stripTagsAndTrim();
+            $homepage = $_POST["homepage"];
+            $homepage = self::stripTagsAndTrim();
+            $overview = $_POST["overview"];
+            $overview = self::stripTagsAndTrim();
+            if ($name == "" && $originalName == "" && $homepage == "" && $overview == "") {
+                throw new ParameterException("Paramètre vide");
             }
         } else {
             throw new ParameterException("Artist name not found");
         }
-        $tvs = Tvshow::create($name, $id);
+        $tvs = Tvshow::create($id, $name, $originalName, $homepage, $overview, $posterId);
         $this->tvshow=$tvs;
     }
 }
