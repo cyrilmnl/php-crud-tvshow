@@ -77,7 +77,24 @@ foreach (TvshowCollection::findAll() as $tv) {
                 <div class="serie__item" id="{$tv->getId()}">
                     <a href="serie.php?serieId={$tv->getId()}" class="{$cote}">
                         <div class="serie__img">
+HTML;
+
+    if ($tv->getPosterId() == null) {
+
+        $html .= <<<HTML
+                            <img src="img/defaultimg.png" alt="poster de la série">
+HTML;
+
+    } else {
+
+        $html .= <<<HTML
                             <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
+HTML;
+
+
+    }
+
+    $html .= <<<HTML
                         </div>
                         <div class="serie__content">
                             <h2>{$name}</h2>
