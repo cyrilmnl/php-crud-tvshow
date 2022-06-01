@@ -84,7 +84,7 @@ HTML
                         <a href="saison.php?serieId={$serie->getId()}">
                             <h2 class="episode__header__content__serie">Série: {$serieName}</h2>
                         </a>
-                        <h2 class="episode__header__content__saison">Saison: {$$saisonName}</h2>
+                        <h2 class="episode__header__content__saison">Saison: {$saisonName}</h2>
                     </div>
                 </div>
 HTML;
