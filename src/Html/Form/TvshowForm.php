@@ -40,6 +40,10 @@ class TvshowForm
     {
         $action = self::escapeString($action);
         $nom = self::escapeString($this->getTvshow()?->getName());
+        $nomOrig = self::escapeString($this->getTvshow()?->getOriginalName());
+        $homepage = self::escapeString($this->getTvshow()?->getHomepage());
+        $overview = self::escapeString($this->getTvshow()?->getOverview());
+        $posterId = self::escapeString($this->getTvshow()?->getPosterId());
         $content = <<<HTML
                     <form method="post" action="{$action}">
                         <label>
@@ -48,8 +52,23 @@ class TvshowForm
                         </label>
                         
                         <label>
-                            Nom
-                            <input type="text" name="name" value="{$nom}" required>
+                            Nom original
+                            <input type="text" name="name" value="{$nomOrig}" required>
+                        </label>
+                        
+                        <label>
+                            Page d'accueil
+                            <input type="text" name="name" value="{$homepage}" required>
+                        </label>
+                        
+                        <label>
+                            Aperçu
+                            <input type="text" name="name" value="{$overview}" required>
+                        </label>
+                        
+                        <label>
+                            Identifiant de la pochette
+                            <input type="text" name="name" value="{$posterId}">
                         </label>
                         
                         <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
