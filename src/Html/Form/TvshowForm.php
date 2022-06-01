@@ -47,7 +47,12 @@ class TvshowForm
                             <input type="text" name="name" value="{$nom}" required>
                         </label>
                         
-                        <input type="hidden" name="id" value="{$this->getArtist()?->getId()}">
+                        <label>
+                            Nom
+                            <input type="text" name="name" value="{$nom}" required>
+                        </label>
+                        
+                        <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
                         
                         <button type="submit">Enregistrer</button>
                     </form>
