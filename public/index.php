@@ -49,7 +49,7 @@ $pageweb->appendContent(
     <<<HTML
             <div class="menu">
                 <form action="admin/tvshow-save.php">
-                    <button class="button" type="submit" name="tvShowId" value="">
+                    <button class="button" type="submit">
                         Ajouter une série
                     </button>
                 </form> 

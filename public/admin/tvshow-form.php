@@ -11,12 +11,30 @@ try {
         if (ctype_digit($_GET["tvShowId"]) == false) {
             throw new ParameterException("No data found");
         } else {
-            $tvShowId = Tvshow::findById((int)$_GET["tvShowId"]);
+            $tvShow = Tvshow::findById((int)$_GET["tvShowId"]);
+            $name = $_POST["name"];
+            $nameoriginal = $_POST["nomoriginal"];
+            $homepage = $_POST["homepage"];
+            $overview = $_POST["overview"];
+
+            $newTv = Tvshow::create($tvShow->getId(), $name, $nameoriginal, $homepage, $overview, null);
+
+            $newTv->update();
         }
     } else {
-        $tvShowId = null;
+        $tvShow = null;
+        $name = $_POST["name"];
+        $nameoriginal = $_POST["nomoriginal"];
+        $homepage = $_POST["homepage"];
+        $overview = $_POST["overview"];
+
+        $newTv = Tvshow::create(null, $name, $nameoriginal, $homepage, $overview, null);
+
+        $newTv->insert($newTv->getName(), $newTv->getOriginalName(), $newTv->getHomepage(), $newTv->getOverview(), null);
     }
+
     header("Location: ../index.php");
+
 } catch (ParameterException) {
     http_response_code(400);
 } catch (EntityNotFoundException) {
