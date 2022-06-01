@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Html\Form;
 
 use Entity\Tvshow;
+use Entity\Exception\ParameterException;
 use Html\StringEscaper;
 
 class TvshowForm
@@ -51,5 +54,28 @@ class TvshowForm
         HTML;
 
         return $content;
+    }
+
+    /** Méthode qui créé une série avec les données extraites et nettoyées
+     *
+     */
+    public function setEntityFromQueryString(): void
+    {
+        if (isset($_POST["id"]) && ctype_digit($_POST["id"])) {
+            $id = (int)$_POST["id"];
+        } else {
+            $id = null;
+        }
+        if (isset($_POST["name"])) {
+            $name = $_POST["name"];
+            $name = self::stripTagsAndTrim();
+            if ($name == "") {
+                throw new ParameterException("Nom vide");
+            }
+        } else {
+            throw new ParameterException("Artist name not found");
+        }
+        $tvs = Tvshow::create($name, $id);
+        $this->tvshow=$tvs;
     }
 }
