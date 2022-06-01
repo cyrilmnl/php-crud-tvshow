@@ -15,4 +15,16 @@ trait StringEscaper
         }
         return $res;
     }
+
+    public function stripTagsAndTrim(): string
+    {
+        $nom = $_POST["name"];
+        if (isset($nom)) {
+            $res = strip_tags($nom);
+            $res = trim($nom);
+        } else {
+            $res = "";
+        }
+        return $res;
+    }
 }
