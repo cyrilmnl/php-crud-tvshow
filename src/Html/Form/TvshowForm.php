@@ -38,64 +38,68 @@ class TvshowForm
 
         if ($empty) {
             $content = <<<HTML
-                    <form method="post" action="{$action}">
+                    <form class="formulaire" method="post" action="{$action}">
+                        <h1>Formulaire</h1>
+                    
                         <label>
-                            Nom
+                            <p>Nom</p>
                             <input type="text" name="name" required>
                         </label>
                         
                         <label>
-                            Nom original
+                            <p>Nom original</p>
                             <input type="text" name="nomoriginal" required>
                         </label>
                         
                         <label>
-                            Page d'accueil
+                            <p>Page d'accueil</p>
                             <input type="text" name="homepage"" required>
                         </label>
                         
                         <label>
-                            Aperçu
+                            <p>Aperçu</p>
                             <input type="text" name="overview"" required>
                         </label>
                         
                         <input type="hidden" name="id">
                         
-                        <button type="submit" name="submit">Enregistrer</button>
+                        <div class="buttons__form">
+                            <button type="submit" class="button">Enregistrer</button>
+                            <button type="reset" class="button">Effacer</button>
+                        </div>
                     </form>
         HTML;
         } else {
-
             $content = <<<HTML
-                    <form method="post" action="{$action}">
+                    <form class="formulaire" method="post" action="{$action}">
+                        <h1>Formulaire</h1>
+                    
                         <label>
-                            Nom
+                            <p>Nom</p>
                             <input type="text" name="name" value="{$nom}" required>
                         </label>
                         
                         <label>
-                            Nom original
+                            <p>Nom original</p>
                             <input type="text" name="nomoriginal" value="{$nomOrig}" required>
                         </label>
                         
                         <label>
-                            Page d'accueil
+                            <p>Page d'accueil</p>
                             <input type="text" name="homepage" value="{$homepage}" required>
                         </label>
                         
                         <label>
-                            Aperçu
+                            <p>Aperçu</p>
                             <input type="text" name="overview" value="{$overview}" required>
                         </label>
                         
                         <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
                         
-                        <button type="submit">Enregistrer</button>
+                        <button type="submit" class="button">Enregistrer</button>
                     </form>
         HTML;
-
         }
-
         return $content;
     }
 
