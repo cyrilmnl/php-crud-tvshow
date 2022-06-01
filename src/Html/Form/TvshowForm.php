@@ -90,16 +90,27 @@ class TvshowForm
         } else {
             $id = null;
         }
-        if (isset($_POST["name"])) {
+        if (isset($_POST["posterId"]) && ctype_digit($_POST["posterId"])) {
+            $posterId = (int)$_POST["posterId"];
+        } else {
+            $posterId = null;
+        }
+        if (isset($_POST["name"]) && isset($_POST["originalName"]) && isset($_POST["homepage"]) && isset($_POST["overview"])) {
             $name = $_POST["name"];
             $name = self::stripTagsAndTrim();
-            if ($name == "") {
-                throw new ParameterException("Nom vide");
+            $originalName = $_POST["originalName"];
+            $originalName = self::stripTagsAndTrim();
+            $homepage = $_POST["homepage"];
+            $homepage = self::stripTagsAndTrim();
+            $overview = $_POST["overview"];
+            $overview = self::stripTagsAndTrim();
+            if ($name == "" && $originalName == "" && $homepage == "" && $overview == "") {
+                throw new ParameterException("Paramètre vide");
             }
         } else {
             throw new ParameterException("Artist name not found");
         }
-        $tvs = Tvshow::create($name, $id);
+        $tvs = Tvshow::create($id, $name, $originalName, $homepage, $overview, $posterId);
         $this->tvshow=$tvs;
     }
 }
