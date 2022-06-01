@@ -4,11 +4,11 @@ namespace Entity;
 
 class Episode
 {
-    private int $id;
     protected int $seasonId;
+    protected int $episodeNumber;
+    private int $id;
     private string $name;
     private string $overview;
-    protected int $episodeNumber;
 
     /** Assesseur de l'id de la classe Episode
      *

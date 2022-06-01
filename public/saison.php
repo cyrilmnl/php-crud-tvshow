@@ -36,11 +36,6 @@ try {
     $pageweb->appendCssUrl("css/styles.css");
 
     /*
-     * Définition du titre de la page
-     */
-    $pageweb->setTitle("Série - {$serie->getName()}");
-
-    /*
  * OPEN HEADER
  */
     $pageweb->appendContent(
@@ -105,7 +100,7 @@ HTML;
     foreach (SeasonCollection::findByTvShowId($serieId) as $saison) {
         $html = <<<HTML
                 <div class="saison__item">
-                    <a href="serie.php?serieId={$saison->getName()}">
+                    <a href="episode.php?saisonId={$saison->getId()}">
                         <div class="serie__img">
 HTML;
 
@@ -143,7 +138,32 @@ HTML;
 HTML
     );
 
+    /*
+ * OPEN FOOTER
+ */
+    $pageweb->appendContent(
+        <<<HTML
+
+            <!-- OPEN FOOTER -->
+            <footer>
+HTML
+    );
+
+    $pageweb->appendContent(WebPage::getLastModification());
+
+    /*
+     * CLOSE FOOTER
+     */
+    $pageweb->appendContent(
+        <<<HTML
+
+            <!-- CLOSE FOOTER -->
+            </footer>
+HTML
+    );
+
     echo $pageweb->toHTML();
+
 } catch (EntityNotFoundException) {
     http_response_code(404);
 }
