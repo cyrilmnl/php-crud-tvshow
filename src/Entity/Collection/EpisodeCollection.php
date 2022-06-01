@@ -20,7 +20,7 @@ class EpisodeCollection
             SELECT *
             FROM episode
             WHERE seasonId = :season
-            ORDER BY name
+            ORDER BY episodeNumber
         SQL
         );
 
