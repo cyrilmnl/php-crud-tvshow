@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Html;
 
+use Html\StringEscaper;
+
 class WebPage
 {
     private string $head = "";
     private string $title = "";
     private string $body = "";
+    use StringEscaper;
 
     /**
      * Constructeur de la classe
