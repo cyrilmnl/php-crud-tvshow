@@ -13,7 +13,6 @@ try {
         if (ctype_digit($_GET["tvShowId"]) == false) {
             throw new ParameterException("No data found");
         } else {
-//            $tvShowId = Tvshow::findById((int)$_GET["tvShowId"]);
             $tvShowId = (int)$_GET["tvShowId"];
         }
     } else {
@@ -25,7 +24,7 @@ try {
     /*
      * Définition du titre de la page
      */
-    $pageweb->setTitle("Liste des show TV");
+    $pageweb->setTitle("Formulaire de création ou d'édition d'une série");
 
     $pageweb->appendCssUrl("../css/styles.css");
 
