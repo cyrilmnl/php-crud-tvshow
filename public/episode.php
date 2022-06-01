@@ -23,10 +23,13 @@ try {
     $saison = Season::findById($saisonId);
     $serie = Tvshow::findById($saison->getTvShowId());
 
+    $serieName = WebPage::escapeString($serie->getName());
+    $saisonName = WebPage::escapeString($saison->getName());
+
     /*
      * Initialisation de WebPage
      */
-    $pageweb = new WebPage("Série - {$serie->getName()}");
+    $pageweb = new WebPage("Série - {$serieName}");
 
     /*
      * Ajout de la feuille de style
@@ -44,8 +47,8 @@ HTML
 
     $pageweb->appendContent(
         <<<HTML
-                <h1>Séries TV : {$serie->getName()}</h1>
-                <h1>{$saison->getName()}</h1>
+                <h1>Séries TV : {$serieName}</h1>
+                <h1>{$saisonName}</h1>
 HTML
     );
 
@@ -79,9 +82,9 @@ HTML
                     </div>
                     <div class="episode__header__content">
                         <a href="saison.php?serieId={$serie->getId()}">
-                            <h2 class="episode__header__content__serie">Série: {$serie->getName()}</h2>
+                            <h2 class="episode__header__content__serie">Série: {$serieName}</h2>
                         </a>
-                        <h2 class="episode__header__content__saison">Saison: {$saison->getName()}</h2>
+                        <h2 class="episode__header__content__saison">Saison: {$$saisonName}</h2>
                     </div>
                 </div>
 HTML;
@@ -90,10 +93,13 @@ HTML;
 
 
     foreach (EpisodeCollection::findBySeasonId($saisonId) as $episode) {
+
+        $episodeName = WebPage::escapeString($episode->getName());
+        $episodeDesc = WebPage::escapeString($episode->getOverview());
         $html = <<<HTML
                 <div class="episode__item">
                     <div class="episode__content">
-                        <h2>{$episode->getEpisodeNumber()} - {$episode->getName()}</h2>
+                        <h2>{$episode->getEpisodeNumber()} - {$episodeName}</h2>
 HTML;
 
         if ($episode->getOverview() == null) {
@@ -102,7 +108,7 @@ HTML;
 HTML;
         } else {
             $html .= <<<HTML
-                        <h3>{$episode->getOverview()}</h3>
+                        <h3>{$episodeDesc}</h3>
 HTML;
         }
 

@@ -60,6 +60,7 @@ HTML
 $cpt = 0;
 
 foreach (TvshowCollection::findAll() as $tv) {
+
     $cote = "";
 
     if ($cpt == 0) {

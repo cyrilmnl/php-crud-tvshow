@@ -28,7 +28,9 @@ try {
     /*
      * Initialisation de WebPage
      */
-    $pageweb = new WebPage("Série - {$serie->getName()}");
+    $serieName = WebPage::escapeString($serie->getName());
+
+    $pageweb = new WebPage("Série - {$serieName}");
 
     /*
      * Ajout de la feuille de style
@@ -48,7 +50,7 @@ HTML
 
     $pageweb->appendContent(
         <<<HTML
-                <h1>Séries TV : {$serie->getName()}</h1>
+                <h1>Séries TV : {$serieName}</h1>
                 <form action="index.php#{$serieId}">
                     <button class="button" type="submit">
                         Retour
@@ -80,16 +82,19 @@ HTML
 HTML
     );
 
+    $serieOriginalName = WebPage::escapeString($serie->getOriginalName());
+    $serieDesc = WebPage::escapeString($serie->getOverview());
+
     $html = <<<HTML
                 <div class="serie__header">
                     <div class="serie__header_poster">
                         <img src="poster.php?id={$serie->getPosterId()}">
                     </div>
                     <div class="serie__header_content">
-                        <h2 class="serie__header__content__title">Nom: {$serie->getName()}</h2>
-                        <h2 class="serie__header__content__originalname">Nom original: {$serie->getOriginalName()}</h2>
+                        <h2 class="serie__header__content__title">Nom: {$serieName}</h2>
+                        <h2 class="serie__header__content__originalname">Nom original: {$serieOriginalName}</h2>
                         <h2>Description:</h2>
-                        <h2 class="serie__header__content__description">{$serie->getOverview()}</h2>
+                        <h2 class="serie__header__content__description">{$serieDesc}</h2>
                     </div>
                 </div>
 HTML;
@@ -98,6 +103,9 @@ HTML;
 
 
     foreach (SeasonCollection::findByTvShowId($serieId) as $saison) {
+
+        $saisonName = WebPage::escapeString($saison->getName());
+
         $html = <<<HTML
                 <div class="saison__item">
                     <a href="episode.php?saisonId={$saison->getId()}">
@@ -117,7 +125,7 @@ HTML;
         $html .= <<<HTML
                         </div>
                         <div class="serie__content">
-                            <h2>{$saison->getName()}</h2>
+                            <h2>{$saisonName}</h2>
                         </div>
                     </a>
                 </div>
