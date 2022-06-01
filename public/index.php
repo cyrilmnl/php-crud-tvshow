@@ -31,6 +31,11 @@ HTML
 $pageweb->appendContent(
     <<<HTML
                 <h1>Séries TV</h1>
+                <form action="admin/tvshow-save.php">
+                    <button class="button" type="submit">
+                        Ajouter une série
+                    </button>
+                </form>    
 HTML
 );
 
