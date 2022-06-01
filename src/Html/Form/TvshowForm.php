@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Html\Form;
 
-use Entity\Tvshow;
 use Entity\Exception\ParameterException;
+use Entity\Tvshow;
 use Html\StringEscaper;
 
 class TvshowForm
 {
     use StringEscaper;
+
     private ?Tvshow $tvshow;
 
     /** Constructeur de la classe TvshowForm
@@ -20,15 +21,6 @@ class TvshowForm
     public function __construct(?Tvshow $tvshow)
     {
         $this->tvshow = $tvshow;
-    }
-
-    /** Assesseur d'une série dans la classe TvshowForm
-     *
-     * @return Tvshow|null
-     */
-    public function getTvshow(): ?Tvshow
-    {
-        return $this->tvshow;
     }
 
     /** Méthode produisant le code HTML du formulaire
@@ -80,6 +72,15 @@ class TvshowForm
         return $content;
     }
 
+    /** Assesseur d'une série dans la classe TvshowForm
+     *
+     * @return Tvshow|null
+     */
+    public function getTvshow(): ?Tvshow
+    {
+        return $this->tvshow;
+    }
+
     /** Méthode qui créé une série avec les données extraites et nettoyées
      *
      */
@@ -111,6 +112,6 @@ class TvshowForm
             throw new ParameterException("Artist name not found");
         }
         $tvs = Tvshow::create($id, $name, $originalName, $homepage, $overview, $posterId);
-        $this->tvshow=$tvs;
+        $this->tvshow = $tvs;
     }
 }
