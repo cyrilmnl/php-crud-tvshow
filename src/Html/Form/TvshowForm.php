@@ -3,9 +3,11 @@
 namespace Html\Form;
 
 use Entity\Tvshow;
+use Html\StringEscaper;
 
 class TvshowForm
 {
+    use StringEscaper;
     private ?Tvshow $tvshow;
 
     /** Constructeur de la classe TvshowForm
