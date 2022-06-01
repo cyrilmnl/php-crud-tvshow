@@ -90,8 +90,8 @@ SERIE
 }
 
 .serie__content {
-    height: 110px;
     overflow: hidden;
+    margin: auto 0px;
 }
 
 /*
@@ -108,6 +108,7 @@ SERIE - ALIGNEMENT A GAUCHE/DROITE
 /*
 SAISON
  */
+
 .saison__item a {
     border: 2px solid var(--primary-color);
     margin: 10px 50px;
@@ -124,6 +125,10 @@ SAISON
 .saison__item a:hover {
     padding: 20px 100px;
 }
+
+/*
+SERIE
+ */
 
 .serie__header {
     border: 2px solid var(--white);
@@ -147,4 +152,45 @@ SAISON
 
 .serie__header_poster {
     margin: auto 40px;
+}
+
+/*
+EPISODE
+ */
+
+.episode__header {
+    border: 2px solid var(--white);
+    margin: 10px 20px;
+    display: flex;
+    padding: 20px 100px;
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 30px;
+    transition: ease-in-out 0.3s;
+    background-color: var(--light-blue);
+    justify-content: space-between;
+}
+
+.episode__header__content__serie {
+    text-align: right;
+}
+
+.episode__header__content a {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.episode__header__content__saison {
+    text-align: right;
+}
+
+.episode__item {
+    border: 2px solid var(--primary-color);
+    margin: 10px 50px;
+    padding: 8px 100px;
+    text-decoration: none;
+    color: black;
+    border-radius: 30px;
+    transition: ease-in-out 0.3s;
+    background-color: var(--white);
 }
