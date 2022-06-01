@@ -10,16 +10,18 @@ html {
     flex-direction: column;
     gap: 25px;
     font-family: 'Poppins', sans-serif;
-    --primary-color: #00a3e8;
+    --primary-color: #ff3c3c;
     --white: #ffffff;
     --light-gray: #dddddd;
-    --light-blue: #3c64ff;
+    --red: #e80000;
+    --black: #000000;
 
-    background: url("../img/background.jpg") no-repeat center center fixed;
+    background: url("../img/bg.png") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
 }
 
 body {
@@ -41,7 +43,8 @@ header {
     padding: 15px 0px;
     border-radius: 30px;
     font-weight: bold;
-    background-color: var(--white);
+    background-color: var(--black);
+    color: var(--white);
 }
 
 main {
@@ -57,7 +60,8 @@ footer {
     padding: 15px 0px;
     text-align: center;
     border-radius: 30px;
-    background-color: var(--white);
+    background-color: var(--black);
+    color: var(--white);
 }
 
 /*
@@ -69,11 +73,11 @@ SERIE
     display: flex;
     padding: 8px 100px;
     text-decoration: none;
-    color: black;
+    color: var(--white);
     justify-content: space-between;
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--white);
+    background-color: var(--black);
 }
 
 .serie__item a:hover {
@@ -115,11 +119,11 @@ SAISON
     display: flex;
     padding: 8px 100px;
     text-decoration: none;
-    color: black;
+    color: var(--white);
     justify-content: center;
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--white);
+    background-color: var(--black);
 }
 
 .saison__item a:hover {
@@ -131,7 +135,6 @@ SERIE
  */
 
 .serie__header {
-    border: 2px solid var(--white);
     margin: 10px 20px;
     display: flex;
     padding: 20px 100px;
@@ -139,7 +142,7 @@ SERIE
     color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--light-blue);
+    background-color: var(--red);
 }
 
 .serie__header__content__title {
@@ -159,7 +162,6 @@ EPISODE
  */
 
 .episode__header {
-    border: 2px solid var(--white);
     margin: 10px 20px;
     display: flex;
     padding: 20px 100px;
@@ -167,7 +169,7 @@ EPISODE
     color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--light-blue);
+    background-color: var(--red);
     justify-content: space-between;
 }
 
@@ -189,8 +191,25 @@ EPISODE
     margin: 10px 50px;
     padding: 8px 100px;
     text-decoration: none;
-    color: black;
+    color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--white);
+    background-color: var(--black);
+}
+
+.button {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background-color: var(--red);
+    transition: 0.3s;
 }

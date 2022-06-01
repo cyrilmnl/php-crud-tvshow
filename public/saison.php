@@ -50,7 +50,7 @@ HTML
         <<<HTML
                 <h1>Séries TV : {$serie->getName()}</h1>
                 <form action="index.php#{$serieId}">
-                    <button type="submit">
+                    <button class="button" type="submit">
                         Retour
                     </button>
                 </form>    
