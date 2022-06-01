@@ -12,24 +12,6 @@ class Poster
     private int $id;
     private string $jpeg;
 
-    /** Assesseur de l'id de la classe Poster
-     *
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /** Assesseur du Jpeg de la classe Poster
-     *
-     * @return string
-     */
-    public function getJpeg(): string
-    {
-        return $this->jpeg;
-    }
-
     public static function findById(int $id): Poster
     {
         $stmt = MyPDO::getInstance()->prepare(
@@ -48,5 +30,23 @@ class Poster
             throw new EntityNotFoundException("No data found");
         }
         return $fetch;
+    }
+
+    /** Assesseur de l'id de la classe Poster
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /** Assesseur du Jpeg de la classe Poster
+     *
+     * @return string
+     */
+    public function getJpeg(): string
+    {
+        return $this->jpeg;
     }
 }

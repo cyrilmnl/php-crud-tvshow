@@ -9,62 +9,16 @@ use PDO;
 
 class Season
 {
-    private int $id;
-    protected int $tvshow;
-    private string $name;
+    protected int $tvShowId;
     protected int $seasonNumber;
     protected ?int $posterId;
+    private int $id;
+    private string $name;
 
     /** Assesseur de l'id de la classe Season
      *
      * @return int
      */
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /** Assesseur du Tvshow dans la classe Season
-     *
-     * @return int
-     */
-    public function getTvshow(): int
-    {
-        return $this->tvshow;
-    }
-
-    /** Assesseur du nom de la classe Season
-     *
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /** Assesseur du numéro de saison de la classe Season
-     *
-     * @return int
-     */
-    public function getSeasonNumber(): int
-    {
-        return $this->seasonNumber;
-    }
-
-    /** Assesseur de l'id du poster dans la classe Season
-     *
-     * @return int
-     */
-    /**
-     * @return int|null
-     */
-    public function getPosterId(): ?int
-    {
-        return $this->posterId;
-    }
 
     /** Méthode permettant d'accéder à une saison par son id
      *
@@ -89,5 +43,53 @@ class Season
             throw new EntityNotFoundException("No data found");
         }
         return $fetch;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /** Assesseur du Tvshow dans la classe Season
+     *
+     * @return int
+     */
+    public function getTvShowId(): int
+    {
+        return $this->tvShowId;
+    }
+
+    /** Assesseur du nom de la classe Season
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /** Assesseur de l'id du poster dans la classe Season
+     *
+     * @return int
+     */
+
+    /** Assesseur du numéro de saison de la classe Season
+     *
+     * @return int
+     */
+    public function getSeasonNumber(): int
+    {
+        return $this->seasonNumber;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPosterId(): ?int
+    {
+        return $this->posterId;
     }
 }

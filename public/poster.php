@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Entity\Poster;
 use Entity\Exception\EntityNotFoundException;
 use Entity\Exception\ParameterException;
+use Entity\Poster;
 
 try {
     if (isset($_GET["id"]) && ctype_digit($_GET["id"]) == false) {

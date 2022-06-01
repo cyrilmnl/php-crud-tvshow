@@ -75,7 +75,7 @@ foreach (TvshowCollection::findAll() as $tv) {
 
     $html = <<<HTML
                 <div class="serie__item" id="{$tv->getId()}">
-                    <a href="serie.php?serieId={$tv->getId()}" class="{$cote}">
+                    <a href="saison.php?serieId={$tv->getId()}" class="{$cote}">
                         <div class="serie__img">
 HTML;
 
@@ -132,7 +132,7 @@ HTML
 $pageweb->appendContent(WebPage::getLastModification());
 
 /*
- * CLOSE MAIN
+ * CLOSE FOOTER
  */
 $pageweb->appendContent(
     <<<HTML
