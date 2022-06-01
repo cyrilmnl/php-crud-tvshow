@@ -16,6 +16,7 @@ try {
     } else {
         $tvShowId = null;
     }
+    header("Location: ../index.php");
 } catch (ParameterException) {
     http_response_code(400);
 } catch (EntityNotFoundException) {
