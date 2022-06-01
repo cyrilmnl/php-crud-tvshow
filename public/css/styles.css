@@ -10,11 +10,12 @@ html {
     flex-direction: column;
     gap: 25px;
     font-family: 'Poppins', sans-serif;
-    --primary-color: #ff3c3c;
-    --white: #ffffff;
-    --light-gray: #dddddd;
+    --light-red: #ff3c3c;
     --red: #e80000;
+    --white: #ffffff;
     --black: #000000;
+    --black-transparent: rgba(0, 0, 0, 0.95);
+    --red-transparent: rgba(232, 0, 0, 0.90);
 
     background: url("../img/bg.png") no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -37,7 +38,7 @@ BASE DE LA PAGE
  */
 
 header {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--light-red);
     text-align: center;
     font-size: 14px;
     padding: 15px 0px;
@@ -56,7 +57,7 @@ main {
 }
 
 footer {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--light-red);
     padding: 15px 0px;
     text-align: center;
     border-radius: 30px;
@@ -67,40 +68,43 @@ footer {
 /*
 SERIE
  */
+
 .serie__item a {
-    border: 2px solid var(--primary-color);
-    margin: 10px 50px;
+    border: 2px solid var(--light-red);
+    margin: 10px 150px;
     display: flex;
-    padding: 8px 100px;
+    padding: 8px 40px;
     text-decoration: none;
     color: var(--white);
     justify-content: space-between;
     border-radius: 30px;
-    transition: ease-in-out 0.3s;
-    background-color: var(--black);
+    transition: transform .2s;
+    align-items: center;
+    background-color: var(--black-transparent);
 }
 
 .serie__item a:hover {
-    padding: 20px 100px;
-}
-
-.serie__img {
-    margin: auto;
-    margin: auto 40px;
-}
-
-.serie__img img {
-    height: 150px;
+    transform: scale(1.02);
 }
 
 .serie__content {
-    overflow: hidden;
-    margin: auto 0px;
+    font-size: 13px;
+}
+
+serie__img {
+    height: 100px;
+    align-items: center;
+
+}
+
+.serie__img img {
+    height: 200px;
+    margin: 0px 20px;
 }
 
 /*
 SERIE - ALIGNEMENT A GAUCHE/DROITE
- */
+*/
 .left {
     flex-direction: row;
 }
@@ -109,12 +113,42 @@ SERIE - ALIGNEMENT A GAUCHE/DROITE
     flex-direction: row-reverse;
 }
 
+
+@media screen and (max-width: 3000px) {
+    .serie__item a {
+        margin: 10px 300px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .serie__item a {
+        margin: 10px 100px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .serie__item a {
+        margin: 10px 50px;
+        flex-direction: column;
+    }
+
+    .serie__content {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .serie__img img {
+        height: 150px;
+    }
+}
+
+
 /*
 SAISON
  */
 
 .saison__item a {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--light-red);
     margin: 10px 50px;
     display: flex;
     padding: 8px 100px;
@@ -122,12 +156,12 @@ SAISON
     color: var(--white);
     justify-content: center;
     border-radius: 30px;
-    transition: ease-in-out 0.3s;
-    background-color: var(--black);
+    background-color: var(--black-transparent);
+    transition: transform .2s;
 }
 
 .saison__item a:hover {
-    padding: 20px 100px;
+    transform: scale(1.02);
 }
 
 /*
@@ -142,7 +176,7 @@ SERIE
     color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--red);
+    background-color: var(--red-transparent);
 }
 
 .serie__header__content__title {
@@ -169,7 +203,7 @@ EPISODE
     color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
-    background-color: var(--red);
+    background-color: var(--red-transparent);
     justify-content: space-between;
 }
 
@@ -187,29 +221,67 @@ EPISODE
 }
 
 .episode__item {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--light-red);
     margin: 10px 50px;
     padding: 8px 100px;
     text-decoration: none;
     color: var(--white);
     border-radius: 30px;
-    transition: ease-in-out 0.3s;
-    background-color: var(--black);
+    transition: transform .2s;
+    background-color: var(--black-transparent);
 }
 
+.episode__item:hover {
+    transform: scale(1.02);
+}
+
+/*
+BUTTON
+ */
+
 .button {
-    background-color: var(--primary-color);
+    background-color: var(--red);
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 13px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     transition: 0.3s;
+    border-radius: 50px;
 }
 
 .button:hover {
-    background-color: var(--red);
-    transition: 0.3s;
+    background-color: var(--light-red);
+}
+
+/*
+SCROLL BAR
+ */
+
+::-webkit-scrollbar {
+    width: 20px;
+    border-radius: 30px;
+    background-color: var(--black-transparent);
+}
+
+::-webkit-scrollbar-track {
+    width: 20px;
+    border-radius: 30px;
+    background-color: var(--black-transparent);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--red);
+    width: 20px;
+    border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-red);
+    width: 20px;
+    border-radius: 30px;
 }
