@@ -96,7 +96,9 @@ class TvshowForm
                         
                         <input type="hidden" name="id" value="{$this->getTvshow()?->getId()}">
                         
-                        <button type="submit" class="button">Enregistrer</button>
+                        <div class="buttons__form">
+                            <button type="submit" class="button">Enregistrer</button>
+                        </div>
                     </form>
         HTML;
         }
