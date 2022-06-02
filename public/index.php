@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 
+use Entity\Collection\GenreCollection;
 use Entity\Collection\TvshowCollection;
 use Html\WebPage;
 
@@ -52,7 +53,24 @@ $pageweb->appendContent(
                     <button class="button" type="submit">
                         Ajouter une série
                     </button>
-                </form> 
+                </form>
+
+                <form action="genre.php?value={}" method="get">
+                    <select id="genre">
+HTML
+);
+
+foreach (GenreCollection::findAll() as $genre) {
+    $pageweb->appendContent("<option value='{$genre->getId()}'>{$genre->getName()}</option>");
+}
+
+$pageweb->appendContent(
+    <<<HTML
+                    </select>
+                    <button class="button" type="submit">
+                        Filtrer
+                    </button>
+                </form>
             </div>
             
             <main>
@@ -62,7 +80,6 @@ HTML
 $cpt = 0;
 
 foreach (TvshowCollection::findAll() as $tv) {
-
     $cote = "";
 
     if ($cpt == 0) {
@@ -83,18 +100,13 @@ foreach (TvshowCollection::findAll() as $tv) {
 HTML;
 
     if ($tv->getPosterId() == null) {
-
         $html .= <<<HTML
                             <img src="img/defaultimg.png" alt="poster de la série">
 HTML;
-
     } else {
-
         $html .= <<<HTML
                             <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
 HTML;
-
-
     }
 
     $html .= <<<HTML
