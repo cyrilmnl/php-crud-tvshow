@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Entity\Genre;
 use Entity\Tvshow_genre;
 use Html\WebPage;
 
@@ -16,10 +17,12 @@ if (isset($_GET["value"]) && ctype_digit($_GET["value"])) {
 
 $pageweb = new WebPage();
 
+$genre = Genre::getGenreById($genreId);
+
 /*
  * Définition du titre de la page
  */
-$pageweb->setTitle("Liste des show TV");
+$pageweb->setTitle("Série - {$genre->getName()}");
 
 $pageweb->appendCssUrl("css/styles.css");
 
@@ -36,7 +39,8 @@ HTML
 
 $pageweb->appendContent(
     <<<HTML
-                <h1>Séries TV</h1>   
+                <h1>Séries TV</h1> 
+                <h2 class="filtrage__genre__title">Genre: {$genre->getName()}</h2>  
 
                 <form action="index.php">
                     <button class="button" type="submit">
@@ -74,7 +78,6 @@ HTML
 $cpt = 0;
 
 foreach (Tvshow_genre::findByGenreId($genreId) as $tv) {
-
     $cote = "";
 
     if ($cpt == 0) {
@@ -95,18 +98,13 @@ foreach (Tvshow_genre::findByGenreId($genreId) as $tv) {
 HTML;
 
     if ($tv->getPosterId() == null) {
-
         $html .= <<<HTML
                             <img src="img/defaultimg.png" alt="poster de la série">
 HTML;
-
     } else {
-
         $html .= <<<HTML
                             <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
 HTML;
-
-
     }
 
     $html .= <<<HTML
