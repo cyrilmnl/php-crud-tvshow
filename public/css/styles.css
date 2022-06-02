@@ -443,6 +443,7 @@ RESPONSIVE
     .episode__item {
         padding: 8px 30px;
     }
+}
 
 /* Formulaire */
 
@@ -493,5 +494,4 @@ RESPONSIVE
     flex-direction: row;
     justify-content: center;
 
-}
 }

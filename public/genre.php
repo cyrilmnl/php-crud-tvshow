@@ -37,6 +37,12 @@ HTML
 $pageweb->appendContent(
     <<<HTML
                 <h1>Séries TV</h1>   
+
+                <form action="index.php">
+                    <button class="button" type="submit">
+                        Enlever le filtrage
+                    </button>
+                </form>
 HTML
 );
 
