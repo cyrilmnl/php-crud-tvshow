@@ -55,8 +55,8 @@ $pageweb->appendContent(
                     </button>
                 </form>
 
-                <form action="genre.php" method="get">
-                    <select name="value">
+                <form class="liste__der" action="genre.php" method="get">
+                    <select class="liste" name="value">
 HTML
 );
 
