@@ -239,6 +239,20 @@ BUTTON
     cursor: pointer;
 }
 
+.menu {
+    border: 2px solid var(--light-red);
+    text-align: center;
+    font-size: 14px;
+    padding: 15px 0px;
+    border-radius: 30px;
+    font-weight: bold;
+    background-color: var(--black-transparent);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 /*
 SCROLL BAR
  */
@@ -268,6 +282,7 @@ SCROLL BAR
     width: 20px;
     border-radius: 30px;
 }
+
 
 /*
 RESPONSIVE
@@ -428,4 +443,55 @@ RESPONSIVE
     .episode__item {
         padding: 8px 30px;
     }
+
+/* Formulaire */
+
+.formulaire{
+    border: 2px solid var(--light-red);
+    text-align: center;
+    font-size: 14px;
+    padding: 15px 0px;
+    border-radius: 30px;
+    font-weight: bold;
+    background-color: var(--black-transparent);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    width: 400px;
+}
+
+.formulaire label {
+    margin: 10px;
+    border: 2px solid var(--light-red);
+    padding: 15px 0px;
+    border-radius: 30px;
+    text-align: left;
+}
+
+.formulaire label p {
+    margin-left: 20px;
+}
+
+.formulaire label input {
+    margin-left: 20px;
+    border: 2px solid red;
+    border-radius: 4px;
+}
+
+.formulaire button {
+    width: 250px;
+    margin: 10px 10px;
+}
+
+.buttons__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
 }
