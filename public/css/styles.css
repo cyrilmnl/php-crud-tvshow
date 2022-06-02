@@ -251,6 +251,7 @@ BUTTON
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: center
 }
 
 /*
@@ -493,5 +494,18 @@ RESPONSIVE
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
 
+.liste {
+    border: 2px solid red;
+    border-radius: 4px;
+    background-color: var(--black-transparent);
+    color: var(--white);
+    padding: 8px 0px;
+    margin-bottom: 10px;
+}
+
+.liste__der {
+    display: flex;
+    flex-direction: column;
 }
