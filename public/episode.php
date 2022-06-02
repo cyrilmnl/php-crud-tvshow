@@ -78,7 +78,19 @@ HTML
     $html = <<<HTML
                 <div class="episode__header">
                     <div class="episode__header__img">
+HTML;
+
+    if ($saison->getPosterId() == null) {
+        $html .= <<<HTML
+                        <img src="img/defaultimg.png">
+HTML;
+    } else {
+        $html .= <<<HTML
                         <img src="poster.php?id={$saison->getPosterId()}">
+HTML;
+    }
+
+    $html .= <<<HTML
                     </div>
                     <div class="episode__header__content">
                         <a href="saison.php?serieId={$serie->getId()}">
@@ -93,7 +105,6 @@ HTML;
 
 
     foreach (EpisodeCollection::findBySeasonId($saisonId) as $episode) {
-
         $episodeName = WebPage::escapeString($episode->getName());
         $episodeDesc = WebPage::escapeString($episode->getOverview());
         $html = <<<HTML

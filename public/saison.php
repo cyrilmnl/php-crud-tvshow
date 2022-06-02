@@ -96,7 +96,19 @@ HTML
     $html = <<<HTML
                 <div class="serie__header">
                     <div class="serie__header_poster">
+HTML;
+
+    if ($serie->getPosterId() == null) {
+        $html .= <<<HTML
+                        <img src="img/defaultimg.png">
+HTML;
+    } else {
+        $html .= <<<HTML
                         <img src="poster.php?id={$serie->getPosterId()}">
+HTML;
+    }
+
+    $html .= <<<HTML
                     </div>
                     <div class="serie__header_content">
                         <h2 class="serie__header__content__title">Nom: {$serieName}</h2>
@@ -111,7 +123,6 @@ HTML;
 
 
     foreach (SeasonCollection::findByTvShowId($serieId) as $saison) {
-
         $saisonName = WebPage::escapeString($saison->getName());
 
         $html = <<<HTML
@@ -179,7 +190,6 @@ HTML
     );
 
     echo $pageweb->toHTML();
-
 } catch (EntityNotFoundException) {
     http_response_code(404);
 }
