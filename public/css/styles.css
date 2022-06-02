@@ -113,48 +113,20 @@ SERIE - ALIGNEMENT A GAUCHE/DROITE
     flex-direction: row-reverse;
 }
 
-
-@media screen and (max-width: 3000px) {
-    .serie__item a {
-        margin: 10px 300px;
-    }
-}
-
-@media screen and (max-width: 1500px) {
-    .serie__item a {
-        margin: 10px 100px;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .serie__item a {
-        margin: 10px 50px;
-        flex-direction: column;
-    }
-
-    .serie__content {
-        font-size: 11px;
-        text-align: center;
-    }
-
-    .serie__img img {
-        height: 150px;
-    }
-}
-
-
 /*
 SAISON
  */
 
 .saison__item a {
     border: 2px solid var(--light-red);
-    margin: 10px 50px;
+    margin: 10px 500px;
     display: flex;
     padding: 8px 100px;
+    flex-direction: row;
     text-decoration: none;
     color: var(--white);
     justify-content: center;
+    align-items: center;
     border-radius: 30px;
     background-color: var(--black-transparent);
     transition: transform .2s;
@@ -169,7 +141,7 @@ SERIE
  */
 
 .serie__header {
-    margin: 10px 20px;
+    margin: 10px 100px;
     display: flex;
     padding: 20px 100px;
     text-decoration: none;
@@ -177,6 +149,7 @@ SERIE
     border-radius: 30px;
     transition: ease-in-out 0.3s;
     background-color: var(--red-transparent);
+    font-size: 13px;
 }
 
 .serie__header__content__title {
@@ -191,20 +164,25 @@ SERIE
     margin: auto 40px;
 }
 
+.serie__header_poster img {
+    height: 200px;
+}
+
 /*
 EPISODE
  */
 
 .episode__header {
-    margin: 10px 20px;
+    margin: 10px 430px;
     display: flex;
-    padding: 20px 100px;
+    padding: 30px;
     text-decoration: none;
     color: var(--white);
     border-radius: 30px;
     transition: ease-in-out 0.3s;
     background-color: var(--red-transparent);
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .episode__header__content__serie {
@@ -222,7 +200,7 @@ EPISODE
 
 .episode__item {
     border: 2px solid var(--light-red);
-    margin: 10px 50px;
+    margin: 10px 250px;
     padding: 8px 100px;
     text-decoration: none;
     color: var(--white);
@@ -233,6 +211,10 @@ EPISODE
 
 .episode__item:hover {
     transform: scale(1.02);
+}
+
+.episode__header__img img {
+    height: 200px;
 }
 
 /*
@@ -254,6 +236,7 @@ BUTTON
 
 .button:hover {
     background-color: var(--light-red);
+    cursor: pointer;
 }
 
 .menu {
@@ -299,6 +282,167 @@ SCROLL BAR
     width: 20px;
     border-radius: 30px;
 }
+
+
+/*
+RESPONSIVE
+ */
+
+@media screen and (max-width: 2000px) {
+    .saison__item a {
+        margin: 10px 150px;
+        flex-direction: row;
+    }
+
+    .episode__item {
+        margin: 10px 200px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .serie__item a {
+        margin: 10px 100px;
+    }
+
+    .episode__item {
+        margin: 10px 150px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .serie__header {
+        align-items: center;
+        margin: 0px 15px;
+    }
+
+    .episode__header {
+        margin: 10px 300px;
+    }
+
+    .episode__item {
+        padding: 8px 100px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .episode__header {
+        margin: 10px 200px;
+    }
+
+    .episode__item {
+        margin: 10px 100px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .saison__item a {
+        margin: 10px 150px;
+        flex-direction: column;
+    }
+
+    .serie__header {
+        flex-direction: column;
+        font-size: 11px;
+    }
+
+    .serie__header__content__title {
+        text-align: center;
+    }
+
+    .serie__header__content__originalname {
+        text-align: center;
+    }
+
+    .episode__header {
+        margin: 10px 100px;
+    }
+
+    .episode__item {
+        padding: 8px 80px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .serie__item a {
+        margin: 10px 50px;
+        flex-direction: row;
+    }
+
+    .serie__content {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .serie__img img {
+        height: 150px;
+    }
+
+    .saison__item a {
+        margin: 10px 110px;
+        flex-direction: column;
+    }
+
+    .serie__header {
+        padding: 20px 20px;
+        text-align: center;
+    }
+
+    .serie__header_poster img {
+        height: 130px;
+    }
+
+    .episode__header {
+        margin: 10px 50px;
+    }
+
+    .episode__header__img img {
+        height: 160px;
+    }
+
+    .episode__item {
+        padding: 8px 50px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .serie__item a {
+        flex-direction: column;
+    }
+
+    .episode__header {
+        margin: 10px 25px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .episode__item {
+        margin: 10px 50px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .serie__item a {
+        margin: 10px 3px;
+    }
+
+    .saison__item a {
+        margin: 10px 20px;
+        flex-direction: column;
+    }
+
+    .episode__header {
+        margin: 10px 10px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .episode__header__content__saison {
+        text-align: center;
+    }
+
+    .episode__item {
+        padding: 8px 30px;
+    }
 
 /* Formulaire */
 
@@ -348,4 +492,6 @@ SCROLL BAR
     display: flex;
     flex-direction: row;
     justify-content: center;
+
+}
 }
