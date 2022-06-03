@@ -38,9 +38,8 @@ class TvshowForm
 
         if ($empty) {
             $content = <<<HTML
-                    <form class="formulaire" method="post" action="{$action}">
+        <form class="formulaire" method="post" action="{$action}">
                         <h1>Formulaire</h1> 
-                    
                         <label>
                             <p>Nom</p>
                             <input type="text" name="name" required>
