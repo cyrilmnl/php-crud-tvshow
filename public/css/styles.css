@@ -496,6 +496,10 @@ RESPONSIVE
     justify-content: center;
 }
 
+/*
+FILTRAGE
+ */
+
 .liste {
     border: 2px solid red;
     border-radius: 4px;
