@@ -43,7 +43,6 @@ if (!isset($_GET["tvShowId"])) {
     $pageweb->appendCssUrl("../css/styles.css");
 
 
-
     $tvshow = Tvshow::findById(($tvShowId));
 
     $form = new TvshowForm($tvshow);
