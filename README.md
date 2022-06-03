@@ -35,3 +35,10 @@ php vendor/bin/php-cs-fixer fix
 #### Configuration de la base de données
 
 ##### Configuration de la base de données dans le fichier .mypdo.ini
+
+#### Aperçu du site :
+Série: https://imgur.com/C2KpCsV.png
+Saison: https://imgur.com/OS8IX6x.png
+Episodes: https://imgur.com/Jrukgq5.png
+Ajout/Modification d'une série: https://imgur.com/ntng1wX.png
+
