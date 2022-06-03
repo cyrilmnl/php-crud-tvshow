@@ -17,8 +17,14 @@ try {
             $homepage = $_POST["homepage"];
             $overview = $_POST["overview"];
 
+            /*
+             * Création de l'objet Tvshow (id de la série existant)
+             */
             $newTv = Tvshow::create($tvShow->getId(), $name, $nameoriginal, $homepage, $overview, null);
 
+            /*
+             * Mise à jour dans la base de données
+             */
             $newTv->update();
         }
     } else {
@@ -28,8 +34,14 @@ try {
         $homepage = $_POST["homepage"];
         $overview = $_POST["overview"];
 
+        /*
+         * Création de l'objet Tvshow (id de la série null)
+         */
         $newTv = Tvshow::create(null, $name, $nameoriginal, $homepage, $overview, null);
 
+        /*
+         * Insertion de la nouvelle série dans la base de données
+         */
         $newTv->insert($newTv->getName(), $newTv->getOriginalName(), $newTv->getHomepage(), $newTv->getOverview(), null);
     }
 

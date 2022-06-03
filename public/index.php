@@ -9,6 +9,9 @@ use Html\WebPage;
 
 require_once '../src/Html/WebPage.php';
 
+/*
+ * Initialisation de la classe WebPage
+ */
 $pageweb = new WebPage();
 
 /*
@@ -16,6 +19,9 @@ $pageweb = new WebPage();
  */
 $pageweb->setTitle("Liste des show TV");
 
+/*
+ * Ajout de la feuille de style
+ */
 $pageweb->appendCssUrl("css/styles.css");
 
 /*
@@ -41,38 +47,45 @@ HTML
 $pageweb->appendContent(
     <<<HTML
 
-            <!-- CLOSE HEADER -->
             </header>
+            <!-- CLOSE HEADER -->
 HTML
 );
 
 $pageweb->appendContent(
     <<<HTML
-            <div class="menu">
-                <form action="admin/tvshow-save.php">
-                    <button class="button" type="submit">
-                        Ajouter une série
-                    </button>
-                </form>
 
-                <form class="liste__der" action="genre.php" method="get">
-                    <select class="liste" name="value">
+                <div class="menu">
+                    <form action="admin/tvshow-save.php">
+                        <button class="button" type="submit">
+                            Ajouter une série
+                        </button>
+                    </form>
+                    <!-- FILTRAGE -->
+                    <form class="liste__der" action="genre.php" method="get">
+                        <select class="liste" name="value">
+
 HTML
 );
 
 foreach (GenreCollection::findAll() as $genre) {
-    $pageweb->appendContent("<option value='{$genre->getId()}'>{$genre->getName()}</option>");
+    $pageweb->appendContent(<<<HTML
+                            <option value='{$genre->getId()}'>{$genre->getName()}</option>
+
+HTML
+    );
 }
 
 $pageweb->appendContent(
     <<<HTML
-                    </select>
-                    <button class="button" type="submit">
-                        Filtrer
-                    </button>
-                </form>
-            </div>
-            
+                        </select>
+                        <button class="button" type="submit">
+                            Filtrer
+                        </button>
+                    </form>
+                <!-- CLOSE FLITRAGE -->
+                </div>
+            <!-- OPEN MAIN -->
             <main>
 HTML
 );
@@ -94,18 +107,22 @@ foreach (TvshowCollection::findAll() as $tv) {
     $desc = WebPage::escapeString($tv->getOverview());
 
     $html = <<<HTML
+
                 <div class="serie__item" id="{$tv->getId()}">
                     <a href="saison.php?serieId={$tv->getId()}" class="{$cote}">
                         <div class="serie__img">
+
 HTML;
 
     if ($tv->getPosterId() == null) {
         $html .= <<<HTML
                             <img src="img/defaultimg.png" alt="poster de la série">
+
 HTML;
     } else {
         $html .= <<<HTML
                             <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
+
 HTML;
     }
 
@@ -128,23 +145,29 @@ HTML;
 $pageweb->appendContent(
     <<<HTML
 
-            <!-- CLOSE MAIN -->
             </main>
+            <!-- CLOSE MAIN -->
 HTML
 );
 
 /*
- * OPEN FOOTER
- */
+* OPEN FOOTER
+*/
 $pageweb->appendContent(
     <<<HTML
 
             <!-- OPEN FOOTER -->
             <footer>
+
 HTML
 );
 
-$pageweb->appendContent(WebPage::getLastModification());
+$lastModif = WebPage::getLastModification();
+
+$pageweb->appendContent(<<<HTML
+                {$lastModif}
+HTML
+);
 
 /*
  * CLOSE FOOTER
@@ -157,4 +180,7 @@ $pageweb->appendContent(
 HTML
 );
 
+/*
+ * Génération du contenu de la page
+ */
 echo $pageweb->toHTML();

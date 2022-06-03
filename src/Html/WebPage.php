@@ -116,11 +116,14 @@ class WebPage
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             
-            <!-- TITRE DE LA PAGE -->
+            <!-- OPEN TITLE -->
             <title>{$this->getTitle()}</title>
+            <!-- CLOSE TITLE -->
             
-            <!-- ENTETE PERSONNALISE -->
+            <!-- OPEN PERSONAL HEAD -->
             {$this->getHead()}
+            <!-- CLOSE PERONAL HEAD -->
+            
         </head>
         <body>
             {$this->getBody()}
@@ -129,9 +132,6 @@ class WebPage
 HTML;
 
     }
-
-
-    // <p style="text-align: right">Dernière modification <i>{$this->getLastModification()}</i></p>
 
     /**
      * Permet de récupérer le titre du site

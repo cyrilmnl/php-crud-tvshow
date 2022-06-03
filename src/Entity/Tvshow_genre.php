@@ -8,9 +8,25 @@ use PDO;
 
 class Tvshow_genre
 {
-    private int $id;
     protected int $genreId;
     protected int $tvShowId;
+    private int $id;
+
+    public static function findByGenreId(int $genreId): array
+    {
+        $stmt = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            SELECT t.id, t.name, t.originalName, t.homepage, t.overview, t.posterId
+            FROM (tvshow t INNER JOIN tvshow_genre tg ON (t.id = tg.tvShowId))
+                INNER JOIN genre g ON (tg.genreId = g.id)
+            WHERE g.id = :genreId
+        SQL
+        );
+
+        $stmt->execute([":genreId" => $genreId]);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Tvshow::class);
+        return $stmt->fetchAll();
+    }
 
     /** Assesseur de l'id de la classe Tvshow_genre
      *
@@ -37,21 +53,5 @@ class Tvshow_genre
     public function getTvShowId(): int
     {
         return $this->tvShowId;
-    }
-
-    public static function findByGenreId(int $genreId): array
-    {
-        $stmt = MyPDO::getInstance()->prepare(
-            <<<'SQL'
-            SELECT t.id, t.name, t.originalName, t.homepage, t.overview, t.posterId
-            FROM (tvshow t INNER JOIN tvshow_genre tg ON (t.id = tg.tvShowId))
-                INNER JOIN genre g ON (tg.genreId = g.id)
-            WHERE g.id = :genreId
-        SQL
-        );
-
-        $stmt->execute([":genreId" => $genreId]);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, Tvshow::class);
-        return $stmt->fetchAll();
     }
 }

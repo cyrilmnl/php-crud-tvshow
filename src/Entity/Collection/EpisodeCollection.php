@@ -11,7 +11,7 @@ class EpisodeCollection
     /** Méthode permettant de retourner un tableau contenant toutes les saisons d'un tvShow
      *
      * @param int $seasonId
-     * @return array
+     * @return Episode[]
      */
     public static function findBySeasonId(int $seasonId): array
     {

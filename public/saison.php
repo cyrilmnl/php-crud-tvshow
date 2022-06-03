@@ -38,8 +38,8 @@ try {
     $pageweb->appendCssUrl("css/styles.css");
 
     /*
- * OPEN HEADER
- */
+    * OPEN HEADER
+    */
     $pageweb->appendContent(
         <<<HTML
 <!-- OPEN HEADER -->
@@ -65,28 +65,33 @@ HTML
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE HEADER -->
             </header>
+            <!-- CLOSE HEADER -->
 HTML
     );
 
     $pageweb->appendContent(
         <<<HTML
+
             <div class="menu">
+                <!-- MODIFIER -->
                 <form action="admin/tvshow-save.php">
                     <button class="button" type="submit" name="tvShowId" value="{$serieId}">
                         Modifier la série
                     </button>
                 </form>
-
+                <!-- CLOSE MODIFIER -->
+                <!-- SUPPRIMER -->
                 <form action="admin/tvshow-delete.php">
                     <button class="button" type="submit" name="tvShowId" value="{$serieId}">
                         Supprimer la série
                     </button>
                 </form>
+                <!-- CLOSE SUPPRIMER -->
             </div>
-            
+            <!-- OPEN MAIN -->
             <main>
+
 HTML
     );
 
@@ -96,15 +101,18 @@ HTML
     $html = <<<HTML
                 <div class="serie__header">
                     <div class="serie__header_poster">
+
 HTML;
 
     if ($serie->getPosterId() == null) {
         $html .= <<<HTML
                         <img src="img/defaultimg.png">
+
 HTML;
     } else {
         $html .= <<<HTML
                         <img src="poster.php?id={$serie->getPosterId()}">
+
 HTML;
     }
 
@@ -126,18 +134,22 @@ HTML;
         $saisonName = WebPage::escapeString($saison->getName());
 
         $html = <<<HTML
+
                 <div class="saison__item">
                     <a href="episode.php?saisonId={$saison->getId()}">
                         <div class="serie__img">
+
 HTML;
 
         if ($saison->getPosterId() == null) {
             $html .= <<<HTML
                             <img src="img/defaultimg.png" alt="poster par défaut">
+
 HTML;
         } else {
             $html .= <<<HTML
                             <img src="poster.php?id={$saison->getPosterId()}" alt="poster de la série">
+
 HTML;
         }
 
@@ -160,23 +172,29 @@ HTML;
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE MAIN -->
             </main>
+            <!-- CLOSE MAIN -->
 HTML
     );
 
     /*
- * OPEN FOOTER
- */
+    * OPEN FOOTER
+    */
     $pageweb->appendContent(
         <<<HTML
 
             <!-- OPEN FOOTER -->
             <footer>
+
 HTML
     );
 
-    $pageweb->appendContent(WebPage::getLastModification());
+    $lastModif = WebPage::getLastModification();
+
+    $pageweb->appendContent(<<<HTML
+                {$lastModif}
+HTML
+    );
 
     /*
      * CLOSE FOOTER
@@ -184,11 +202,14 @@ HTML
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE FOOTER -->
             </footer>
+            <!-- CLOSE FOOTER -->
 HTML
     );
 
+    /*
+    * Génération du contenu de la page
+    */
     echo $pageweb->toHTML();
 } catch (EntityNotFoundException) {
     http_response_code(404);

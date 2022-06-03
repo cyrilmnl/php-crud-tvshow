@@ -15,8 +15,14 @@ if (isset($_GET["value"]) && ctype_digit($_GET["value"])) {
     exit();
 }
 
+/*
+ * Initilisation de la classe WebPage
+ */
 $pageweb = new WebPage();
 
+/*
+ * Récupération du genre demandé grâce à l'id passé en paramètre
+ */
 $genre = Genre::getGenreById($genreId);
 
 /*
@@ -24,6 +30,9 @@ $genre = Genre::getGenreById($genreId);
  */
 $pageweb->setTitle("Série - {$genre->getName()}");
 
+/*
+ * Ajout de la feuille de style
+ */
 $pageweb->appendCssUrl("css/styles.css");
 
 /*
@@ -70,8 +79,9 @@ $pageweb->appendContent(
                     </button>
                 </form>
             </div>
-            
+            <!-- OPEN MAIN -->
             <main>
+
 HTML
 );
 
@@ -95,15 +105,18 @@ foreach (Tvshow_genre::findByGenreId($genreId) as $tv) {
                 <div class="serie__item" id="{$tv->getId()}">
                     <a href="saison.php?serieId={$tv->getId()}" class="{$cote}">
                         <div class="serie__img">
+
 HTML;
 
     if ($tv->getPosterId() == null) {
         $html .= <<<HTML
                             <img src="img/defaultimg.png" alt="poster de la série">
+
 HTML;
     } else {
         $html .= <<<HTML
                             <img src="poster.php?id={$tv->getPosterId()}" alt="poster de la série">
+
 HTML;
     }
 
@@ -132,17 +145,23 @@ HTML
 );
 
 /*
- * OPEN FOOTER
- */
+* OPEN FOOTER
+*/
 $pageweb->appendContent(
     <<<HTML
 
             <!-- OPEN FOOTER -->
             <footer>
+
 HTML
 );
 
-$pageweb->appendContent(WebPage::getLastModification());
+$lastModif = WebPage::getLastModification();
+
+$pageweb->appendContent(<<<HTML
+                {$lastModif}
+HTML
+);
 
 /*
  * CLOSE FOOTER
@@ -155,4 +174,7 @@ $pageweb->appendContent(
 HTML
 );
 
+/*
+ * Génération du contenu de la page
+ */
 echo $pageweb->toHTML();

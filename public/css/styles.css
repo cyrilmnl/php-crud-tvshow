@@ -448,7 +448,7 @@ RESPONSIVE
 
 /* Formulaire */
 
-.formulaire{
+.formulaire {
     border: 2px solid var(--light-red);
     text-align: center;
     font-size: 14px;
@@ -462,7 +462,7 @@ RESPONSIVE
     flex-grow: 1;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     position: absolute;
     width: 400px;
 }
@@ -495,6 +495,10 @@ RESPONSIVE
     flex-direction: row;
     justify-content: center;
 }
+
+/*
+FILTRAGE
+ */
 
 .liste {
     border: 2px solid red;
