@@ -20,14 +20,28 @@ if (isset($_GET["saisonId"]) && ctype_digit($_GET["saisonId"])) {
 try {
     $saisonId = (int)$saisonId;
 
+    /*
+     * Initialisation de l'objet saison grâce à
+     * l'ID précédemment récupéré
+     */
     $saison = Season::findById($saisonId);
+
+    /*
+     * Initialisation de l'objet Tvshow grâce à
+     * la méthode permettant de récuper l'Id d'un
+     * Tvshow depuis une saison
+     */
     $serie = Tvshow::findById($saison->getTvShowId());
 
+    /*
+     * Protection des variables
+     */
     $serieName = WebPage::escapeString($serie->getName());
     $saisonName = WebPage::escapeString($saison->getName());
 
     /*
-     * Initialisation de WebPage
+     * Initialisation de WebPage avec en titre
+     * le nom de la série
      */
     $pageweb = new WebPage("Série - {$serieName}");
 
@@ -36,7 +50,9 @@ try {
      */
     $pageweb->appendCssUrl("css/styles.css");
 
-
+    /*
+     * OPEN HEADER
+     */
     $pageweb->appendContent(
         <<<HTML
 <!-- OPEN HEADER -->
@@ -45,6 +61,9 @@ try {
 HTML
     );
 
+    /*
+     * CONTENU AFFICHE EN HAUT DE PAGE
+     */
     $pageweb->appendContent(
         <<<HTML
                 <h1>Séries TV : {$serieName}</h1>
@@ -58,8 +77,8 @@ HTML
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE HEADER -->
             </header>
+            <!-- CLOSE HEADER -->
 HTML
     );
 
@@ -78,6 +97,7 @@ HTML
     $html = <<<HTML
                 <div class="episode__header">
                     <div class="episode__header__img">
+
 HTML;
 
     if ($saison->getPosterId() == null) {
@@ -91,6 +111,7 @@ HTML;
     }
 
     $html .= <<<HTML
+
                     </div>
                     <div class="episode__header__content">
                         <a href="saison.php?serieId={$serie->getId()}">
@@ -108,9 +129,11 @@ HTML;
         $episodeName = WebPage::escapeString($episode->getName());
         $episodeDesc = WebPage::escapeString($episode->getOverview());
         $html = <<<HTML
+
                 <div class="episode__item">
                     <div class="episode__content">
                         <h2>{$episode->getEpisodeNumber()} - {$episodeName}</h2>
+
 HTML;
 
         if ($episode->getOverview() == null) {
@@ -124,6 +147,7 @@ HTML;
         }
 
         $html .= <<<HTML
+
                     </div>
                 </div>
 HTML;
@@ -138,8 +162,8 @@ HTML;
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE MAIN -->
             </main>
+            <!-- CLOSE MAIN -->
 HTML
     );
 
@@ -151,10 +175,17 @@ HTML
 
             <!-- OPEN FOOTER -->
             <footer>
+
 HTML
     );
 
-    $pageweb->appendContent(WebPage::getLastModification());
+    $lastModif = WebPage::getLastModification();
+
+    $pageweb->appendContent(
+        <<<HTML
+                {$lastModif}
+HTML
+    );
 
     /*
      * CLOSE FOOTER
@@ -162,11 +193,14 @@ HTML
     $pageweb->appendContent(
         <<<HTML
 
-            <!-- CLOSE FOOTER -->
             </footer>
+            <!-- CLOSE FOOTER -->
 HTML
     );
 
+    /*
+     * Génération du contenu de la page
+     */
     echo $pageweb->toHtml();
 } catch (EntityNotFoundException) {
     http_response_code(404);
