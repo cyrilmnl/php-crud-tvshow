@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Entity\Collection;
@@ -9,9 +10,9 @@ use PDO;
 
 class GenreCollection
 {
-    /** Méthode permettant de retourner un tableau contenant toutes les saisons d'un tvShow
+    /**Méthode permettant de retourner un tableau contenant toutes les saisons d'un tvShow
      *
-     * @return array
+     * @return Genre[]
      */
     public static function findAll(): array
     {
